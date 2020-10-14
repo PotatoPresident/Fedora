@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "fedora",
+  "version": "${version}",
+  "name": "Fedora",
+  "description": "Adds hats",
+  "authors": [
+    "Potatoboy9999"
+  ],
+  "contact": {
+    "website": "test",
+    "repo": "test"
+  },
+  "license": "MIT",
+  "icon": "assets/fedora/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "us.potatoboy.fedora.client.FedoraClient"
+    ],
+    "main": [
+      "us.potatoboy.fedora.Fedora"
+    ],
+    "cardinal-components-entity": [
+      "us.potatoboy.fedora.Fedora"
+    ]
+  },
+  "mixins": [
+    "fedora.mixins.json"
+  ],
+  "custom": {
+    "cardinal-components": [
+      "fedora:hats"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.10.1+build.209",
+    "fabric": "*",
+    "minecraft": "1.16.3"
+  }
+}
