@@ -12,7 +12,7 @@
     "repo": "test"
   },
   "license": "MIT",
-  "icon": "assets/fedora/icon.png",
+  "icon": "fedoraIcon.png",
   "environment": "*",
   "entrypoints": {
     "client": [

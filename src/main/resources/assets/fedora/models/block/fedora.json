@@ -1,0 +1,35 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "fedora:block/fedora",
+		"particle": "fedora:block/fedora"
+	},
+	"elements": [
+		{
+			"from": [-5, 0, -5],
+			"to": [5, 1, 5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 8, 3]},
+			"faces": {
+				"north": {"uv": [7, 0, 8, 1], "texture": "#0"},
+				"east": {"uv": [7, 0, 8, 1], "texture": "#0"},
+				"south": {"uv": [7, 0, 8, 1], "texture": "#0"},
+				"west": {"uv": [7, 0, 8, 1], "texture": "#0"},
+				"up": {"uv": [7, 0, 8, 1], "texture": "#0"},
+				"down": {"uv": [7, 0, 8, 1], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-4, 1, -4],
+			"to": [4, 4, 4],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 9, 4]},
+			"faces": {
+				"north": {"uv": [0, 0, 7, 3], "texture": "#0"},
+				"east": {"uv": [0, 0, 7, 3], "texture": "#0"},
+				"south": {"uv": [0, 0, 7, 3], "texture": "#0"},
+				"west": {"uv": [0, 0, 7, 3], "texture": "#0"},
+				"up": {"uv": [7, 0, 8, 1], "texture": "#0"},
+				"down": {"uv": [0, 0, 7, 3], "texture": "#0"}
+			}
+		}
+	]
+}

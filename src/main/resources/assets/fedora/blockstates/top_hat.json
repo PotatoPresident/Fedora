@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "fedora:block/top_hat" }
+  }
+}

@@ -1,4 +1,4 @@
-package us.potatoboy.fedora;
+package us.potatoboy.fedora.client.FeatureRenderers;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,14 +15,15 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
+import us.potatoboy.fedora.Fedora;
+import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.component.PlayerHatComponent;
 
 @Environment(EnvType.CLIENT)
-public class HatFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
-    //public static final ModelIdentifier identifier = new ModelIdentifier("fedora:tophat");
+public class PlayerHatFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
     private FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context;
 
-    public HatFeatureRenderer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context) {
+    public PlayerHatFeatureRenderer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context) {
         super(context);
         this.context = context;
     }
