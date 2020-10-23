@@ -1,29 +1,45 @@
 package us.potatoboy.fedora;
 
-import net.minecraft.client.util.ModelIdentifier;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
 public class HatManager {
-    private static HashMap<String, ModelIdentifier> hats = new HashMap<>();
+    private static HashSet<Hat> hats = new HashSet<>();
 
-    public static HashMap<String, ModelIdentifier> getHats() {
+    public static HashSet<Hat> getHats() {
         return hats;
     }
 
     public static void registerHats() {
-        hats.put("Top Hat", new ModelIdentifier("fedora:top_hat"));
-        hats.put("Pig", new ModelIdentifier("fedora:pig"));
-        hats.put("Tiny Potato", new ModelIdentifier("fedora:lil_tater"));
-        hats.put("Fedora", new ModelIdentifier("fedora:fedora"));
+        hats.add(new Hat("top_hat", "Potatoboy9999", true));
+        hats.add(new Hat("pig", "Potatoboy9999", true));
+        hats.add(new Hat("lil_tater", "Potatoboy9999", true));
+        hats.add(new Hat("fedora", "Potatoboy9999", true));
     }
 
     public static Hat getRandomHat() {
         Random generator = new Random();
-        Object[] hatNames = hats.keySet().toArray();
-        return new Hat((String) hatNames[generator.nextInt(hatNames.length)]);
+        Object[] hatNames = hats.toArray();
+        return (Hat) hatNames[generator.nextInt(hatNames.length)];
+    }
+
+    public static boolean isRegistered(String id) {
+        for (Hat hat : hats) {
+            if (hat.id.equals(id)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static Hat getFromID(String id) {
+        for (Hat hat : hats) {
+            if (hat.id.equals(id)) {
+                return hat;
+            }
+        }
+
+        return null;
     }
 }

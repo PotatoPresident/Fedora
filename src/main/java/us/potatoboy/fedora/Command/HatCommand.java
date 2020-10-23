@@ -1,14 +1,11 @@
 package us.potatoboy.fedora.Command;
 
-import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.command.argument.GameProfileArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -49,11 +46,11 @@ public class HatCommand {
 
     private static int remove(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(context, "target");
-        String hatName = StringArgumentType.getString(context, "hat");
+        String hatId = StringArgumentType.getString(context, "hat");
 
-        for (String hat : HatManager.getHats().keySet()) {
-            if (hat.equalsIgnoreCase(hatName)) {
-                Fedora.HAT_COMPONENT.get(player).removeHat(new Hat(hat));
+        for (Hat hat : HatManager.getHats()) {
+            if (hat.id.equalsIgnoreCase(hatId)) {
+                Fedora.PLAYER_HAT_COMPONENT.get(player).removeHat(hat);
                 //TODO make translatable
                 context.getSource().sendFeedback(new LiteralText("Removed %s for %s"), true);
                 return 1;
@@ -66,11 +63,11 @@ public class HatCommand {
 
     private static int unlock(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(context, "target");
-        String hatName = StringArgumentType.getString(context, "hat");
+        String hatId = StringArgumentType.getString(context, "hat");
 
-        for (String hat : HatManager.getHats().keySet()) {
-            if (hat.equalsIgnoreCase(hatName)) {
-                Fedora.HAT_COMPONENT.get(player).unlockHat(new Hat(hat));
+        for (Hat hat : HatManager.getHats()) {
+            if (hat.id.equalsIgnoreCase(hatId)) {
+                Fedora.PLAYER_HAT_COMPONENT.get(player).unlockHat(hat);
                 //TODO make translatable
                 context.getSource().sendFeedback(new LiteralText("Unlocked %s for %s"), true);
                 return 1;

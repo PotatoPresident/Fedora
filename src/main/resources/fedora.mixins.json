@@ -6,6 +6,12 @@
   "mixins": [
   ],
   "client": [
+    "AnimalModelHeadInvoker",
+    "LivingEntityMixin",
+    "LlamaHeadAccessor",
+    "RabbitHeadAccessor",
+    "RavagerHeadAccessor",
+    "SnowHeadAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -30,13 +30,13 @@ public class PlayerHatFeatureRenderer extends FeatureRenderer<AbstractClientPlay
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        PlayerHatComponent hatComponent = Fedora.HAT_COMPONENT.get(entity);
+        PlayerHatComponent hatComponent = Fedora.PLAYER_HAT_COMPONENT.get(entity);
         Hat currentHat = hatComponent.getCurrentHat();
         if (currentHat == null) {
             return;
         }
 
-        ModelIdentifier id = currentHat.identifier;
+        ModelIdentifier id = currentHat.getModelId();
         BakedModel bakedModel = MinecraftClient.getInstance().getBakedModelManager().getModel(id);
 
         matrices.push();

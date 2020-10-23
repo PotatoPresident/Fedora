@@ -27,7 +27,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
     public void setCurrentHat(Hat currentHat) {
         this.currentHat = currentHat;
-        Fedora.HAT_COMPONENT.sync(playerEntity);
+        Fedora.PLAYER_HAT_COMPONENT.sync(playerEntity);
     }
 
     public ArrayList<Hat> getUnlockedHats() {
@@ -36,34 +36,26 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
     public void unlockHat(Hat hat) {
         //TODO Do a toast or something
-        if (getHatFromUnlocked(hat) == null) {
+        if (!unlockedHats.contains(hat)) {
             unlockedHats.add(hat);
         }
-        Fedora.HAT_COMPONENT.sync(playerEntity);
+        Fedora.PLAYER_HAT_COMPONENT.sync(playerEntity);
     }
 
     public void removeHat(Hat hat) {
-        unlockedHats.remove(getHatFromUnlocked(hat));
-        Fedora.HAT_COMPONENT.sync(playerEntity);
-    }
-
-    private Hat getHatFromUnlocked(Hat hat) {
-        for (Hat unlockedHat : unlockedHats) {
-            if (unlockedHat.name.equalsIgnoreCase(hat.name)) {
-                return unlockedHat;
-            }
-        }
-
-        return null;
+        unlockedHats.remove(hat);
+        Fedora.PLAYER_HAT_COMPONENT.sync(playerEntity);
     }
 
     @Override
     public void readFromNbt(CompoundTag compoundTag) {
         if (compoundTag.contains("currenthat")) {
-            String hatName = compoundTag.getString("currenthat");
+            String hatId = compoundTag.getString("currenthat");
 
-            if(!HatManager.getHats().containsKey(hatName)) return;
-            setCurrentHat(new Hat(hatName));
+            Hat hat = HatManager.getFromID(hatId);
+            if (hat != null) {
+                setCurrentHat(hat);
+            }
         } else {
             setCurrentHat(null);
         }
@@ -72,9 +64,11 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
             unlockedHats = new ArrayList<>();
             ListTag listTag = compoundTag.getList("unlockedHats", 10);
             for(int i = 0; i < listTag.size(); ++i) {
-                String hatName = listTag.getCompound(i).getString("name");
-                if(!HatManager.getHats().containsKey(hatName)) continue;
-                unlockedHats.add(new Hat(hatName));
+                String hatId = listTag.getCompound(i).getString("name");
+                Hat hat = HatManager.getFromID(hatId);
+                if (hat != null) {
+                    unlockedHats.add(hat);
+                }
             }
         }
     }
@@ -82,7 +76,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
     @Override
     public void writeToNbt(CompoundTag compoundTag) {
         if (currentHat != null) {
-            compoundTag.putString("currenthat", currentHat.name);
+            compoundTag.putString("currenthat", currentHat.id);
         } else {
             compoundTag.putString("currenthat", "");
         }
@@ -91,7 +85,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
             ListTag listTag = new ListTag();
             unlockedHats.forEach((hat -> {
                 CompoundTag compoundTag1 = new CompoundTag();
-                compoundTag1.putString("name", hat.name);
+                compoundTag1.putString("name", hat.id);
                 listTag.add(compoundTag1);
             }));
 
