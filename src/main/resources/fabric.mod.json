@@ -23,6 +23,9 @@
     ],
     "cardinal-components-entity": [
       "us.potatoboy.fedora.Fedora"
+    ],
+    "rrp:pregen": [
+      "us.potatoboy.fedora.HatLoader"
     ]
   },
   "mixins": [

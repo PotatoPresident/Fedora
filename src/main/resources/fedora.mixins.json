@@ -4,15 +4,16 @@
   "package": "us.potatoboy.fedora.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "LivingEntityMixin"
   ],
   "client": [
     "AnimalModelHeadInvoker",
-    "LivingEntityMixin",
     "LlamaHeadAccessor",
     "RabbitHeadAccessor",
     "RavagerHeadAccessor",
     "SnowHeadAccessor"
   ],
+  "server": [],
   "injectors": {
     "defaultRequire": 1
   }

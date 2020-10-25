@@ -10,14 +10,13 @@ public class HatManager {
         return hats;
     }
 
-    public static void registerHats() {
-        hats.add(new Hat("top_hat", "Potatoboy9999", true));
-        hats.add(new Hat("pig", "Potatoboy9999", true));
-        hats.add(new Hat("lil_tater", "Potatoboy9999", true));
-        hats.add(new Hat("fedora", "Potatoboy9999", true));
+    public static void registerHat(String id, String creator, Boolean obtainable) {
+        hats.add(new Hat(id, creator, obtainable));
     }
 
     public static Hat getRandomHat() {
+        if (hats.isEmpty()) return null;
+
         Random generator = new Random();
         Object[] hatNames = hats.toArray();
         return (Hat) hatNames[generator.nextInt(hatNames.length)];

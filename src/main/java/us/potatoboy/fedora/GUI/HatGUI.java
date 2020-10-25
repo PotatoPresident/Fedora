@@ -34,7 +34,7 @@ public class HatGUI extends LightweightGuiDescription {
 
         ArrayList<Hat> hats = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getUnlockedHats();
         BiConsumer<Hat, HatChoice> configurator = (Hat hat, HatChoice hatChoice) -> {
-            hatChoice.setLabel(new TranslatableText("fedora:" + hat.id));
+            hatChoice.setLabel(new TranslatableText("fedora.hat." + hat.id));
             hatChoice.setSize(75, 5);
             hatChoice.setHatId(hat.id);
 

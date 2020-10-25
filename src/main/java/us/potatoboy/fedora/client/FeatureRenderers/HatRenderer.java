@@ -13,6 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.client.FedoraClient;
@@ -26,6 +27,8 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+        if (entity instanceof PlayerEntity) return;
+
         Hat hat = Fedora.ENTITY_HAT_COMPONENT.get(entity).getCurrentHat();
         if (hat == null) return;
 
@@ -35,16 +38,21 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
 
         matrices.push();
 
-        /*
-        if (entity.isBaby()) {
-            matrices.translate(0.0D, 0.03125D, 0.0D);
-            matrices.scale(0.7F, 0.7F, 0.7F);
-            matrices.translate(0.0D, 1.0D, 0.0D);
-        }
-         */
-
         ModelPart head = null;
         M model = getContextModel();
+
+        if (entity.isBaby()) {
+            if (model instanceof ModelWithHead) {
+                matrices.translate(0.0D, 0.03125D, 0.0D);
+                matrices.scale(0.7F, 0.7F, 0.7F);
+                matrices.translate(0.0D, 1.0D, 0.0D);
+            } else {
+                //TODO deal with baby's
+                matrices.pop();
+                return;
+            }
+        }
+
         if (model instanceof ModelWithHead) {
             head = ((ModelWithHead) model).getHead();
         } else if (model instanceof AnimalModel && !(model instanceof BeeEntityModel)) {
@@ -63,6 +71,7 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
                 break;
             }
         }
+
         if (head != null) {
             head.rotate(matrices);
         }

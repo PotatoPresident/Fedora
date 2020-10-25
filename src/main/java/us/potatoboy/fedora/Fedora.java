@@ -23,7 +23,6 @@ public class Fedora implements ModInitializer, EntityComponentInitializer {
 
     @Override
     public void onInitialize() {
-        HatManager.registerHats();
         HatCommand.init();
 
         ServerSidePacketRegistry.INSTANCE.register(SET_HAT_PACKET_ID, (packetContext, attachedData) -> {
