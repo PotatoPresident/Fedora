@@ -1,0 +1,156 @@
+{
+	"credit": "Potatoboy9999",
+	"lang": {
+		"en_us": "Pig"
+	},
+	"rarity": "LEGENDARY",
+	"texture_size": [64, 32],
+	"textures": {
+		"0": "entity/pig/pig",
+		"particle": "entity/pig/pig"
+	},
+	"elements": [
+		{
+			"name": "body_sub_1",
+			"from": [-5, 0, -8],
+			"to": [5, 8, 8],
+			"rotation": {"angle": 0, "axis": "x", "origin": [0, 3, -15]},
+			"faces": {
+				"north": {"uv": [9, 4, 11.75, 8], "texture": "#0"},
+				"east": {"uv": [7, 8, 9.25, 16], "texture": "#0"},
+				"south": {"uv": [11.75, 4, 13.75, 8], "texture": "#0"},
+				"west": {"uv": [12.25, 8, 14.25, 16], "texture": "#0"},
+				"up": {"uv": [16, 16, 13.5, 8], "texture": "#0"},
+				"down": {"uv": [11.5, 8, 9, 16], "texture": "#0"}
+			}
+		},
+		{
+			"name": "head",
+			"from": [-4, 2, -15],
+			"to": [4, 10, -7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, -6, -1]},
+			"faces": {
+				"north": {"uv": [2, 4, 4, 8], "texture": "#0"},
+				"east": {"uv": [0, 4, 2, 8], "texture": "#0"},
+				"south": {"uv": [6, 4, 8, 8], "texture": "#0"},
+				"west": {"uv": [4, 4, 6, 8], "texture": "#0"},
+				"up": {"uv": [4, 4, 2, 0], "texture": "#0"},
+				"down": {"uv": [6, 0, 4, 4], "texture": "#0"}
+			}
+		},
+		{
+			"name": "head",
+			"from": [-2, 3, -16],
+			"to": [2, 6, -15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, -6, -1]},
+			"faces": {
+				"north": {"uv": [4.25, 8.5, 5.25, 10], "texture": "#0"},
+				"east": {"uv": [4, 8.5, 4.25, 10], "texture": "#0"},
+				"south": {"uv": [5.5, 8.5, 6.5, 10], "texture": "#0"},
+				"west": {"uv": [5.25, 8.5, 5.5, 10], "texture": "#0"},
+				"up": {"uv": [5.25, 8.5, 4.25, 8], "texture": "#0"},
+				"down": {"uv": [6.25, 8, 5.25, 8.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "leg1",
+			"from": [-5, -6, 4],
+			"to": [-1, 0, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, -6, -1]},
+			"faces": {
+				"north": {"uv": [1, 10, 2, 13], "texture": "#0"},
+				"east": {"uv": [0, 10, 1, 13], "texture": "#0"},
+				"south": {"uv": [3, 10, 4, 13], "texture": "#0"},
+				"west": {"uv": [2, 10, 3, 13], "texture": "#0"},
+				"up": {"uv": [2, 10, 1, 8], "texture": "#0"},
+				"down": {"uv": [3, 8, 2, 10], "texture": "#0"}
+			}
+		},
+		{
+			"name": "leg2",
+			"from": [1, -6, 4],
+			"to": [5, 0, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, -6, -1]},
+			"faces": {
+				"north": {"uv": [1, 10, 2, 13], "texture": "#0"},
+				"east": {"uv": [0, 10, 1, 13], "texture": "#0"},
+				"south": {"uv": [3, 10, 4, 13], "texture": "#0"},
+				"west": {"uv": [2, 10, 3, 13], "texture": "#0"},
+				"up": {"uv": [2, 10, 1, 8], "texture": "#0"},
+				"down": {"uv": [3, 8, 2, 10], "texture": "#0"}
+			}
+		},
+		{
+			"name": "leg3",
+			"from": [-5, -6, -8],
+			"to": [-1, 0, -4],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, -6, -1]},
+			"faces": {
+				"north": {"uv": [1, 10, 2, 13], "texture": "#0"},
+				"east": {"uv": [0, 10, 1, 13], "texture": "#0"},
+				"south": {"uv": [3, 10, 4, 13], "texture": "#0"},
+				"west": {"uv": [2, 10, 3, 13], "texture": "#0"},
+				"up": {"uv": [2, 10, 1, 8], "texture": "#0"},
+				"down": {"uv": [3, 8, 2, 10], "texture": "#0"}
+			}
+		},
+		{
+			"name": "leg4",
+			"from": [1, -6, -8],
+			"to": [5, 0, -4],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, -6, -1]},
+			"faces": {
+				"north": {"uv": [1, 10, 2, 13], "texture": "#0"},
+				"east": {"uv": [0, 10, 1, 13], "texture": "#0"},
+				"south": {"uv": [3, 10, 4, 13], "texture": "#0"},
+				"west": {"uv": [2, 10, 3, 13], "texture": "#0"},
+				"up": {"uv": [2, 10, 1, 8], "texture": "#0"},
+				"down": {"uv": [3, 8, 2, 10], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "body",
+			"origin": [0, 13, 2],
+			"children": [
+				{
+					"name": "rotation",
+					"origin": [0, 13, 2],
+					"children": [
+						{
+							"name": "body_sub_1",
+							"origin": [0, 13, 2],
+							"children": [0]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "head",
+			"origin": [0, 12, -6],
+			"children": [1, 2]
+		},
+		{
+			"name": "leg1",
+			"origin": [-3, 6, 7],
+			"children": [3]
+		},
+		{
+			"name": "leg2",
+			"origin": [3, 6, 7],
+			"children": [4]
+		},
+		{
+			"name": "leg3",
+			"origin": [-3, 6, -5],
+			"children": [5]
+		},
+		{
+			"name": "leg4",
+			"origin": [3, 6, -5],
+			"children": [6]
+		}
+	]
+}
