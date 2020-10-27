@@ -17,11 +17,10 @@ public class EntityHatComponent implements ComponentV3, AutoSyncedComponent {
 
     public EntityHatComponent() {
         if (new Random().nextInt(4) == 0) {
-            currentHat = HatManager.getRandomHat();
+            currentHat = HatManager.getWeightedRandomHat();
         } else {
             currentHat = null;
         }
-
     }
 
     @Override

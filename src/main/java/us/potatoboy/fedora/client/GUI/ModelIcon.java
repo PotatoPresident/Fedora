@@ -1,7 +1,5 @@
-package us.potatoboy.fedora.GUI;
+package us.potatoboy.fedora.client.GUI;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.icon.Icon;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;

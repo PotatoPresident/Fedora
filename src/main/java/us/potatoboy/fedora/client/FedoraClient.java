@@ -14,11 +14,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
 import org.lwjgl.glfw.GLFW;
-import us.potatoboy.fedora.GUI.HatGUI;
-import us.potatoboy.fedora.GUI.HatScreen;
 import us.potatoboy.fedora.HatManager;
 import us.potatoboy.fedora.client.FeatureRenderers.HatRenderer;
 import us.potatoboy.fedora.client.FeatureRenderers.PlayerHatFeatureRenderer;
+import us.potatoboy.fedora.client.GUI.HatGUI;
+import us.potatoboy.fedora.client.GUI.HatScreen;
+import us.potatoboy.fedora.packets.ClientPackets;
 
 import java.util.HashMap;
 
@@ -28,6 +29,8 @@ public class FedoraClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ClientPackets.init();
+
         KeyBinding hatKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.fedora.hatmenu",
                 InputUtil.Type.KEYSYM,

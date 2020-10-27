@@ -10,8 +10,8 @@ public class HatManager {
         return hats;
     }
 
-    public static void registerHat(String id, String creator, Boolean obtainable) {
-        hats.add(new Hat(id, creator, obtainable));
+    public static void registerHat(String id, String creator, Boolean obtainable, Hat.Rarity rarity) {
+        hats.add(new Hat(id, creator, obtainable, rarity));
     }
 
     public static Hat getRandomHat() {
@@ -20,6 +20,30 @@ public class HatManager {
         Random generator = new Random();
         Object[] hatNames = hats.toArray();
         return (Hat) hatNames[generator.nextInt(hatNames.length)];
+    }
+
+    public static Hat getWeightedRandomHat() {
+        if (hats.isEmpty()) return null;
+
+        int totalWeight = 0;
+        for (Hat hat : hats) {
+            totalWeight += hat.rarity.getWeight();
+        }
+
+        int randomIndex = -1;
+        Object[] hatArray = hats.toArray();
+        double random = Math.random() * totalWeight;
+        for (int i = 0; i < hats.size(); ++i)
+        {
+            random -= ((Hat) hatArray[i]).rarity.getWeight();
+            if (random <= 0.0d)
+            {
+                randomIndex = i;
+                break;
+            }
+        }
+
+        return (Hat) hatArray[randomIndex];
     }
 
     public static boolean isRegistered(String id) {

@@ -1,4 +1,4 @@
-package us.potatoboy.fedora.GUI;
+package us.potatoboy.fedora.client.GUI;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;

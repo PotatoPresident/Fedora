@@ -53,6 +53,8 @@ public class HatLoader implements RRPPreGenEntrypoint {
             for (File file : modelFiles) {
                 String hatName = FilenameUtils.removeExtension(file.getName());
                 String creator = "Unknown";
+                Hat.Rarity rarity = Hat.Rarity.COMMON;
+
                 try {
                     JsonObject jsonObject = new JsonObject();
 
@@ -78,6 +80,12 @@ public class HatLoader implements RRPPreGenEntrypoint {
                         LOGGER.severe("Failed to read lang for hat: " + file.getPath());
                     }
 
+                    try {
+                        rarity = Hat.Rarity.valueOf(jsonObject.get("rarity").getAsString());
+                    } catch (Exception e) {
+                        LOGGER.severe("Failed to read rarity for hat: " + file.getPath());
+                    }
+
                 } catch (IllegalStateException e) {
                     LOGGER.severe("Something went wrong loading hat: " + file.getPath());
                 }
@@ -86,7 +94,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
                     RESOURCE_PACK.addLang(new Identifier("fedora", id), jLang);
                 });
 
-                HatManager.registerHat(hatName, creator, true);
+                HatManager.registerHat(hatName, creator, true, rarity);
             }
         }
 

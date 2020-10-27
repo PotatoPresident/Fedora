@@ -2,12 +2,16 @@ package us.potatoboy.fedora.component;
 
 import dev.onyxstudios.cca.api.v3.component.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.PacketByteBuf;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatManager;
+import us.potatoboy.fedora.packets.ClientPackets;
 
 import java.util.ArrayList;
 
@@ -38,8 +42,13 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
         //TODO Do a toast or something
         if (!unlockedHats.contains(hat)) {
             unlockedHats.add(hat);
+
+            PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
+            passedData.writeString(hat.id, hat.id.length());
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerEntity, ClientPackets.UNLOCK_HAT, passedData);
+
+            Fedora.PLAYER_HAT_COMPONENT.sync(playerEntity);
         }
-        Fedora.PLAYER_HAT_COMPONENT.sync(playerEntity);
     }
 
     public void removeHat(Hat hat) {

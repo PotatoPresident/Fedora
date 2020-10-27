@@ -1,4 +1,4 @@
-package us.potatoboy.fedora.Command;
+package us.potatoboy.fedora.command;
 
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
