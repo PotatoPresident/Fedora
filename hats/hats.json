@@ -1,0 +1,14 @@
+{
+  "models": [
+    "fedora",
+    "lil_tater",
+    "pizza",
+    "top_hat"
+  ],
+  "textures": [
+    "box",
+    "fedora",
+    "lil_tater",
+    "pizza"
+  ]
+}
