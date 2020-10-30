@@ -3,6 +3,7 @@ package us.potatoboy.fedora.component;
 import dev.onyxstudios.cca.api.v3.component.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
 import net.minecraft.nbt.CompoundTag;
+import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatManager;
 
@@ -16,7 +17,7 @@ public class EntityHatComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     public EntityHatComponent() {
-        if (new Random().nextInt(4) == 0) {
+        if (new Random().nextInt(Fedora.config.hatChance) == 0) {
             currentHat = HatManager.getWeightedRandomHat();
         } else {
             currentHat = null;

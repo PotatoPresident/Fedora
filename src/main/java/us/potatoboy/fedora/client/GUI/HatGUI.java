@@ -106,8 +106,9 @@ public class HatGUI extends LightweightGuiDescription {
         @Override
         public void paint(MatrixStack matrices, int x, int y, int mouseX, int mouseY) {
             int hatIndex = offset + (currentPage * 7);
-            if (hatIndex > unlockedHats.size() - 1) return;
+            if (!isVisable()) return;
             hat = unlockedHats.get(hatIndex);
+
             setLabel(new TranslatableText("fedora.hat." + hat.id).formatted(hat.rarity.getFormatting()));
 
             if (this.isFocused()) {
@@ -124,12 +125,27 @@ public class HatGUI extends LightweightGuiDescription {
 
         @Override
         public void renderTooltip(MatrixStack matrices, int x, int y, int tX, int tY) {
+            if (!isVisable()) return;
+
             ArrayList<Text> textList = new ArrayList<>();
             textList.add(new TranslatableText("fedora.text.creator", hat.creator));
             textList.add(new TranslatableText("fedora.text.rarity", new LiteralText(hat.rarity.name()).formatted(hat.rarity.getFormatting())));
 
             Screen screen = MinecraftClient.getInstance().currentScreen;
             screen.renderTooltip(matrices, textList, tX + x, tY + y);
+        }
+
+        @Override
+        public void onClick(int x, int y, int button) {
+            if (!isVisable()) return;
+
+            super.onClick(x, y, button);
+        }
+
+        private boolean isVisable() {
+            int hatIndex = offset + (currentPage * 7);
+            if (hatIndex > unlockedHats.size() - 1) return false;
+            return true;
         }
     }
 }

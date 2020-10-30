@@ -1,6 +1,8 @@
 package us.potatoboy.fedora;
 
 import com.google.gson.*;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RRPPreGenEntrypoint;
 import net.devtech.arrp.api.RuntimeResourcePack;
@@ -10,6 +12,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import us.potatoboy.fedora.config.FedoraConfig;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -35,13 +38,20 @@ public class HatLoader implements RRPPreGenEntrypoint {
 
     @Override
     public void pregen() {
-        hatsFolder = new File(FabricLoader.getInstance().getGameDirectory(), "hats");
+        AutoConfig.register(FedoraConfig.class, JanksonConfigSerializer::new);
+        FedoraConfig config = AutoConfig.getConfigHolder(FedoraConfig.class).getConfig();
+
+        hatsFolder = new File(FabricLoader.getInstance().getConfigDir().toFile(), "fedora/hats");
         modelsFolder = new File(hatsFolder, "models");
         textFolder = new File(hatsFolder, "textures");
 
 
         if (!hatsFolder.isDirectory()) {
             LOGGER.info("Not hats installed, downloading hats from server");
+            downloadHatsFromServer();
+        }
+
+        if (config.hatVer < getServerHatVersion()) {
             downloadHatsFromServer();
         }
 
@@ -52,7 +62,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
             HashMap<String, JLang> lang = new HashMap<>();
 
             for (File file : modelFiles) {
-                String hatName = FilenameUtils.removeExtension(file.getName());
+                String hatName = FilenameUtils.removeExtension(file.getName()).toLowerCase();
                 String creator = "Unknown";
                 Hat.Rarity rarity = Hat.Rarity.COMMON;
 
@@ -151,6 +161,16 @@ public class HatLoader implements RRPPreGenEntrypoint {
         } catch (Exception e) {
             LOGGER.info("Failed to download hats from server");
             e.printStackTrace();
+        }
+    }
+
+    private int getServerHatVersion() {
+        try {
+            JsonObject jsonObject = readJsonUrl("https://raw.githubusercontent.com/PotatoPresident/Fedora/master/hats/hats.json");
+            return jsonObject.get("version").getAsInt();
+        } catch (Exception e) {
+            LOGGER.info("Failed to check for updates on server");
+            return 0;
         }
     }
 }

@@ -122,5 +122,6 @@ public class FedoraClient implements ClientModInitializer {
         registerHelper(BatEntity.class, new HatHelper(-0.3, 0, 0, 1F));
         registerHelper(IronGolemEntity.class, new HatHelper(0.25, 0, 0, 1F));
         registerHelper(TraderLlamaEntity.class, new HatHelper(0.5, 0.2, 0, 1F));
+        registerHelper(ShulkerEntity.class, new HatHelper(0.3, 0, 0, 1));
     }
 }

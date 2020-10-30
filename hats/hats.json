@@ -1,15 +1,18 @@
 {
+  "version": 1,
   "models": [
     "fedora",
     "lil_tater",
     "pizza",
     "top_hat",
-    "pig"
+    "pig",
+    "astronaut"
   ],
   "textures": [
     "box",
     "fedora",
     "lil_tater",
-    "pizza"
+    "pizza",
+    "antenna"
   ]
 }

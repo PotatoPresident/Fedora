@@ -3,7 +3,7 @@
 	"lang": {
 		"en_us": "Fedora"
 	},
-	"rarity": "RARE",
+	"rarity": "COMMON",
 	"textures": {
 		"0": "fedora:block/fedora",
 		"particle": "fedora:block/fedora"

@@ -26,6 +26,9 @@
     ],
     "rrp:pregen": [
       "us.potatoboy.fedora.HatLoader"
+    ],
+    "modmenu": [
+      "us.potatoboy.fedora.config.ModMenuIntegration"
     ]
   },
   "mixins": [

@@ -3,6 +3,7 @@
 	"lang": {
 		"en_us": "Top Hat"
 	},
+	"rarity": "COMMON",
 	"textures": {
 		"0": "block/anvil",
 		"1": "block/red_wool",

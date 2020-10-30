@@ -26,7 +26,7 @@ public class Hat {
     public enum Rarity {
         COMMON(10, Formatting.WHITE),
         UNCOMMON(8, Formatting.GREEN),
-        RARE(4, Formatting.DARK_BLUE),
+        RARE(4, Formatting.AQUA),
         LEGENDARY(1, Formatting.GOLD);
 
         private int weight;

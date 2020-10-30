@@ -35,6 +35,10 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     public ArrayList<Hat> getUnlockedHats() {
+        if (playerEntity.isCreative()) {
+            return new ArrayList<>(HatManager.getHats());
+        }
+
         return unlockedHats;
     }
 

@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistryV3;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import nerdhub.cardinal.components.api.ComponentRegistry;
 import nerdhub.cardinal.components.api.ComponentType;
 import nerdhub.cardinal.components.api.util.RespawnCopyStrategy;
@@ -13,6 +14,7 @@ import net.minecraft.util.Identifier;
 import us.potatoboy.fedora.command.HatCommand;
 import us.potatoboy.fedora.component.EntityHatComponent;
 import us.potatoboy.fedora.component.PlayerHatComponent;
+import us.potatoboy.fedora.config.FedoraConfig;
 import us.potatoboy.fedora.packets.CommonPackets;
 
 public class Fedora implements ModInitializer, EntityComponentInitializer {
@@ -20,9 +22,12 @@ public class Fedora implements ModInitializer, EntityComponentInitializer {
     public static final ComponentKey<PlayerHatComponent> PLAYER_HAT_COMPONENT = ComponentRegistryV3.INSTANCE.getOrCreate(new Identifier("fedora", "hats"), PlayerHatComponent.class);
     public static final ComponentType<EntityHatComponent> ENTITY_HAT_COMPONENT = ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier("fedora", "entityhat"), EntityHatComponent.class);
     public static final String MOD_ID = "fedora";
+    public static FedoraConfig config;
 
     @Override
     public void onInitialize() {
+        config = AutoConfig.getConfigHolder(FedoraConfig.class).getConfig();
+
         HatCommand.init();
         CommonPackets.init();
     }
