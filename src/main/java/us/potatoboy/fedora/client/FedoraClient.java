@@ -46,7 +46,7 @@ public class FedoraClient implements ClientModInitializer {
         }));
 
         ModelLoadingRegistry.INSTANCE.registerAppender((manager, out) -> {
-            HatManager.getHats().forEach((hat -> {
+            HatManager.getHatRegistry().forEach((hat -> {
                 out.accept(hat.getModelId());
             }));
         });

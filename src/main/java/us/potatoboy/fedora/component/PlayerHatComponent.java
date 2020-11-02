@@ -11,7 +11,7 @@ import net.minecraft.network.PacketByteBuf;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatManager;
-import us.potatoboy.fedora.packets.ClientPackets;
+import us.potatoboy.fedora.packets.CommonPackets;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
     public ArrayList<Hat> getUnlockedHats() {
         if (playerEntity.isCreative()) {
-            return new ArrayList<>(HatManager.getHats());
+            return new ArrayList<>(HatManager.getHatRegistry());
         }
 
         return unlockedHats;
@@ -49,7 +49,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
             PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
             passedData.writeString(hat.id, hat.id.length());
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerEntity, ClientPackets.UNLOCK_HAT, passedData);
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerEntity, CommonPackets.UNLOCK_HAT, passedData);
 
             Fedora.PLAYER_HAT_COMPONENT.sync(playerEntity);
         }
@@ -68,6 +68,8 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
             Hat hat = HatManager.getFromID(hatId);
             if (hat != null) {
                 setCurrentHat(hat);
+            } else {
+                setCurrentHat(null);
             }
         } else {
             setCurrentHat(null);

@@ -1,6 +1,15 @@
 {
   "toast.fedora.hatunlocked": "Hat Unlocked",
   "fedora.text.creator": "Creator: %s",
-  "fedora.text.rarity": "Rarity: %s"
-
+  "fedora.text.rarity": "Rarity: %s",
+  "text.fedora.hatunlock": "Unlocked hat %s for %s",
+  "text.fedora.hatremove": "Removed hat %s from %s",
+  "text.autoconfig.fedora/config.title": "Fedora Config",
+  "text.autoconfig.fedora/config.option.autoDownload": "Automatically download new hats when added",
+  "text.autoconfig.fedora/config.option.hatChance": "Chance for entity to have a hat",
+  "text.autoconfig.fedora/config.option.hatBlacklist": "Entity hat blacklist",
+  "text.autoconfig.fedora/config.option.serverHats": "Download custom hats from servers",
+  "toast.fedora.serverHats": "Server Hats",
+  "toast.fedora.serverHats.desc": "Successfully downloaded",
+  "fedora.hat.none": "None"
 }

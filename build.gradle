@@ -47,8 +47,8 @@ dependencies {
     modImplementation "io.github.cottonmc:LibGui:3.1.0+1.16.3"
     include "io.github.cottonmc:LibGui:3.1.0+1.16.3"
 
-    modImplementation group: 'net.devtech', name: 'arrp', version: '0.2.6'
-    include group: 'net.devtech', name: 'arrp', version: '0.2.6'
+    modImplementation group: 'net.devtech', name: 'arrp', version: '0.2.9'
+    include group: 'net.devtech', name: 'arrp', version: '0.2.9'
 
     modApi("me.shedaniel.cloth:config-2:4.8.2") {
         exclude(group: "net.fabricmc.fabric-api")

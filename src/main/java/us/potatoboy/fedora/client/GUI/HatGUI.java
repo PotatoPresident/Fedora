@@ -68,8 +68,8 @@ public class HatGUI extends LightweightGuiDescription {
         });
         root.add(forwards, 165, 0, 20, 20);
 
-        ArrayList<Hat> hats = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getUnlockedHats();
-
+        ArrayList<Hat> hats = unlockedHats;
+        hats.add(0, new Hat("none", null, false, null));
 
         for (int i = 0; i < 7; i++) {
             if (hats.size() <= i) return;
@@ -79,11 +79,11 @@ public class HatGUI extends LightweightGuiDescription {
 
             hatChoice.setOnClick(() -> {
                 int hatIndex = hatChoice.offset + (currentPage * 7);
-                currentHat = unlockedHats.get(hatIndex);
+                currentHat = hats.get(hatIndex);
 
                 PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
                 passedData.writeString(currentHat.id);
-                ClientSidePacketRegistry.INSTANCE.sendToServer(CommonPackets.SET_HAT_PACKET_ID, passedData);
+                ClientSidePacketRegistry.INSTANCE.sendToServer(CommonPackets.SET_HAT, passedData);
             });
 
             root.add(hatChoice, 85, 25 + (i * 25));
@@ -109,13 +109,13 @@ public class HatGUI extends LightweightGuiDescription {
             if (!isVisable()) return;
             hat = unlockedHats.get(hatIndex);
 
-            setLabel(new TranslatableText("fedora.hat." + hat.id).formatted(hat.rarity.getFormatting()));
+            setLabel(new TranslatableText("fedora.hat." + hat.id));
 
             if (this.isFocused()) {
                 this.renderTooltip(matrices, x, y, mouseX, mouseY);
             }
 
-            if (currentHat != null && currentHat.equals(hat)) {
+            if (currentHat != null && currentHat.equals(hat) || currentHat == null && hat.id.equals("none")) {
                 setEnabled(false);
             } else {
                 setEnabled(true);
@@ -126,6 +126,7 @@ public class HatGUI extends LightweightGuiDescription {
         @Override
         public void renderTooltip(MatrixStack matrices, int x, int y, int tX, int tY) {
             if (!isVisable()) return;
+            if (hat.id.equals("none")) return;
 
             ArrayList<Text> textList = new ArrayList<>();
             textList.add(new TranslatableText("fedora.text.creator", hat.creator));

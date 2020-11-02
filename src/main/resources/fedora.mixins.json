@@ -13,7 +13,9 @@
     "RavagerHeadAccessor",
     "SnowHeadAccessor"
   ],
-  "server": [],
+  "server": [
+    "PlayerManagerMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

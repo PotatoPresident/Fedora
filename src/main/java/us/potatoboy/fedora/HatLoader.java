@@ -2,7 +2,7 @@ package us.potatoboy.fedora;
 
 import com.google.gson.*;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
-import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RRPPreGenEntrypoint;
 import net.devtech.arrp.api.RuntimeResourcePack;
@@ -31,15 +31,19 @@ public class HatLoader implements RRPPreGenEntrypoint {
         boolean isPng = file.isFile() && file.getName().endsWith(".png");
         return isPng;
     };
-    private File hatsFolder;
-    private File modelsFolder;
-    private File textFolder;
+    private static File hatsFolder;
+    private static File modelsFolder;
+    private static File textFolder;
     public static final RuntimeResourcePack RESOURCE_PACK = RuntimeResourcePack.create("fedora:hats");
+
+    public static File[] modelFiles;
+    public static File[] textureFiles;
 
     @Override
     public void pregen() {
-        AutoConfig.register(FedoraConfig.class, JanksonConfigSerializer::new);
+        AutoConfig.register(FedoraConfig.class, GsonConfigSerializer::new);
         FedoraConfig config = AutoConfig.getConfigHolder(FedoraConfig.class).getConfig();
+        int serverVer = getServerHatVersion();
 
         hatsFolder = new File(FabricLoader.getInstance().getConfigDir().toFile(), "fedora/hats");
         modelsFolder = new File(hatsFolder, "models");
@@ -49,14 +53,22 @@ public class HatLoader implements RRPPreGenEntrypoint {
         if (!hatsFolder.isDirectory()) {
             LOGGER.info("Not hats installed, downloading hats from server");
             downloadHatsFromServer();
+        } else if (config.autoDownload) {
+            if (config.hatVer < serverVer) {
+                LOGGER.info("New hats available on server. Downloading");
+                downloadHatsFromServer();
+                config.hatVer = serverVer;
+                AutoConfig.getConfigHolder(FedoraConfig.class).save();
+            }
         }
 
-        if (config.hatVer < getServerHatVersion()) {
-            downloadHatsFromServer();
-        }
+        loadFiles();
+    }
 
-        File[] modelFiles = this.modelsFolder.listFiles(POSSIBLE_HAT);
-        File[] textureFiles = this.textFolder.listFiles(POSSIBLE_TEXTURE);
+    public static void loadFiles() {
+        HatManager.resetRegistry();
+        modelFiles = modelsFolder.listFiles(POSSIBLE_HAT);
+        textureFiles = textFolder.listFiles(POSSIBLE_TEXTURE);
 
         if (modelFiles != null) {
             HashMap<String, JLang> lang = new HashMap<>();
@@ -123,7 +135,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
 
                     RESOURCE_PACK.addTexture(new Identifier("fedora", "block/" + textureName), in);
                 } catch (IOException e) {
-                    LOGGER.severe("Something went wrong loading texture: " + file.getPath());
+                    LOGGER.warning("Something went wrong loading texture: " + file.getPath());
                 }
             }
         }

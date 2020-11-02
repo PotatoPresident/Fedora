@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatManager;
@@ -48,11 +49,11 @@ public class HatCommand {
         PlayerEntity player = EntityArgumentType.getPlayer(context, "target");
         String hatId = StringArgumentType.getString(context, "hat");
 
-        for (Hat hat : HatManager.getHats()) {
+        for (Hat hat : HatManager.getHatRegistry()) {
             if (hat.id.equalsIgnoreCase(hatId)) {
                 Fedora.PLAYER_HAT_COMPONENT.get(player).removeHat(hat);
                 //TODO make translatable
-                context.getSource().sendFeedback(new LiteralText("Removed %s for %s"), true);
+                context.getSource().sendFeedback(new TranslatableText("text.fedora.hatremove", hat.id, player.getDisplayName()), true);
                 return 1;
             }
         }
@@ -65,11 +66,11 @@ public class HatCommand {
         PlayerEntity player = EntityArgumentType.getPlayer(context, "target");
         String hatId = StringArgumentType.getString(context, "hat");
 
-        for (Hat hat : HatManager.getHats()) {
+        for (Hat hat : HatManager.getHatRegistry()) {
             if (hat.id.equalsIgnoreCase(hatId)) {
                 Fedora.PLAYER_HAT_COMPONENT.get(player).unlockHat(hat);
                 //TODO make translatable
-                context.getSource().sendFeedback(new LiteralText("Unlocked %s for %s"), true);
+                context.getSource().sendFeedback(new TranslatableText("text.fedora.hatunlock", hat.id,  player.getDisplayName()), true);
                 return 1;
             }
         }

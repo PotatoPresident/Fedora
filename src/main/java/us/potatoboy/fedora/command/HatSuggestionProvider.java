@@ -15,7 +15,7 @@ public class HatSuggestionProvider implements SuggestionProvider<ServerCommandSo
     public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
         String hatName = builder.getRemaining().toLowerCase();
 
-        HatManager.getHats().forEach(hat -> {
+        HatManager.getHatRegistry().forEach(hat -> {
             if (hat.id.contains(hatName.toLowerCase())) {
                 builder.suggest(hat.id);
             }
