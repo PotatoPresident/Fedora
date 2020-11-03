@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatManager;
 import us.potatoboy.fedora.packets.CommonPackets;
@@ -29,6 +28,5 @@ public abstract class PlayerManagerMixin {
         }
         passedData.writeString("END");
         ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, CommonPackets.HAT_LIST, passedData);
-        Fedora.LOGGER.info("a");
     }
 }

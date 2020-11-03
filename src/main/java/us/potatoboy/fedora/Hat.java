@@ -8,13 +8,11 @@ import net.minecraft.util.Formatting;
 public class Hat {
     public final String id;
     public final String creator;
-    public final boolean obtainable;
     public final Rarity rarity;
 
-    public Hat(String id, String creator, boolean obtainable, Rarity rarity) {
+    public Hat(String id, String creator, Rarity rarity) {
         this.id = id;
         this.creator = creator;
-        this.obtainable = obtainable;
         this.rarity = rarity;
     }
 

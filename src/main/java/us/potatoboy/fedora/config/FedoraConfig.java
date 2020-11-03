@@ -19,12 +19,16 @@ public class FedoraConfig implements ConfigData {
 
     public int hatChance = 4;
 
+    public boolean moddedHats = true;
+
     public List<String> hatBlacklist = Arrays.asList("minecraft:armor_stand", "minecraft:witch");
 
     public Boolean isBlacklisted(Identifier identifier) {
         for (String entity : hatBlacklist) {
             if (identifier.toString().equals(entity)) return true;
         }
+
+        if (moddedHats == false && !identifier.getNamespace().equals("minecraft")) return true;
 
         return false;
     }

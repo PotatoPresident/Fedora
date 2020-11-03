@@ -25,8 +25,8 @@ public class HatManager {
         return hatRegistry;
     }
 
-    public static void registerHat(String id, String creator, Boolean obtainable, Hat.Rarity rarity) {
-        hatRegistry.add(new Hat(id, creator, obtainable, rarity));
+    public static void registerHat(String id, String creator, Hat.Rarity rarity) {
+        hatRegistry.add(new Hat(id, creator, rarity));
     }
 
     public static void resetRegistry() {

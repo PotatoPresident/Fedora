@@ -9,6 +9,7 @@
   "text.autoconfig.fedora/config.option.hatChance": "Chance for entity to have a hat",
   "text.autoconfig.fedora/config.option.hatBlacklist": "Entity hat blacklist",
   "text.autoconfig.fedora/config.option.serverHats": "Download custom hats from servers",
+  "text.autoconfig.fedora/config.option.moddedHats": "Give modded entities hats",
   "toast.fedora.serverHats": "Server Hats",
   "toast.fedora.serverHats.desc": "Successfully downloaded",
   "fedora.hat.none": "None"

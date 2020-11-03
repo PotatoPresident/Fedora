@@ -122,7 +122,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
                     RESOURCE_PACK.addLang(new Identifier("fedora", id), jLang);
                 });
 
-                HatManager.registerHat(hatName, creator, true, rarity);
+                HatManager.registerHat(hatName, creator, rarity);
             }
         }
 

@@ -48,7 +48,7 @@ public class HatGUI extends LightweightGuiDescription {
         root.add(player, 0, 0, 80, 200);
 
         WDynamicLabel pageNumber = new WDynamicLabel(() -> (currentPage + 1) + "/" + pages);
-        root.add(pageNumber, 125, 5, 30, 30);
+        root.add(pageNumber, 135, 5, 30, 30);
 
         WButton backwards = new WButton();
         backwards.setLabel(new LiteralText("<"));
@@ -66,20 +66,17 @@ public class HatGUI extends LightweightGuiDescription {
                 ++currentPage;
             }
         });
-        root.add(forwards, 165, 0, 20, 20);
-
-        ArrayList<Hat> hats = unlockedHats;
-        hats.add(0, new Hat("none", null, false, null));
+        root.add(forwards, 185, 0, 20, 20);
 
         for (int i = 0; i < 7; i++) {
-            if (hats.size() <= i) return;
-            Hat hat = hats.get(i);
+            if (unlockedHats.size() <= i) return;
+            Hat hat = unlockedHats.get(i);
             HatChoice hatChoice = new HatChoice(i);
-            hatChoice.setSize(100, 5);
+            hatChoice.setSize(120, 5);
 
             hatChoice.setOnClick(() -> {
                 int hatIndex = hatChoice.offset + (currentPage * 7);
-                currentHat = hats.get(hatIndex);
+                currentHat = unlockedHats.get(hatIndex);
 
                 PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
                 passedData.writeString(currentHat.id);

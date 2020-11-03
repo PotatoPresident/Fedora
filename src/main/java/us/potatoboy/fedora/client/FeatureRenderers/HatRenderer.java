@@ -14,6 +14,7 @@ import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
@@ -29,7 +30,8 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if (entity instanceof PlayerEntity) return;
-        if (Fedora.config.isBlacklisted(Registry.ENTITY_TYPE.getId(entity.getType()))) return;
+        Identifier entityId = Registry.ENTITY_TYPE.getId(entity.getType());
+        if (Fedora.config.isBlacklisted(entityId)) return;
 
         Hat hat = Fedora.ENTITY_HAT_COMPONENT.get(entity).getCurrentHat();
         if (hat == null) return;

@@ -52,7 +52,7 @@ public class HatCommand {
         for (Hat hat : HatManager.getHatRegistry()) {
             if (hat.id.equalsIgnoreCase(hatId)) {
                 Fedora.PLAYER_HAT_COMPONENT.get(player).removeHat(hat);
-                //TODO make translatable
+
                 context.getSource().sendFeedback(new TranslatableText("text.fedora.hatremove", hat.id, player.getDisplayName()), true);
                 return 1;
             }
@@ -69,7 +69,7 @@ public class HatCommand {
         for (Hat hat : HatManager.getHatRegistry()) {
             if (hat.id.equalsIgnoreCase(hatId)) {
                 Fedora.PLAYER_HAT_COMPONENT.get(player).unlockHat(hat);
-                //TODO make translatable
+
                 context.getSource().sendFeedback(new TranslatableText("text.fedora.hatunlock", hat.id,  player.getDisplayName()), true);
                 return 1;
             }
