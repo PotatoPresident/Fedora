@@ -141,6 +141,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
         }
 
         RRPCallback.EVENT.register(a -> a.add(RESOURCE_PACK));
+        LOGGER.info("Loaded hats");
     }
 
     private static JsonObject readJsonUrl(String urlString) throws Exception {
