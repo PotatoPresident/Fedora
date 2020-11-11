@@ -3,7 +3,7 @@
 	"lang": {
 		"en_us": "Pig"
 	},
-	"rarity": "LEGENDARY",
+	"rarity": "EPIC",
 	"texture_size": [64, 32],
 	"textures": {
 		"0": "entity/pig/pig",

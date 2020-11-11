@@ -1,0 +1,70 @@
+{
+	"credit": "Potatoboy9999",
+	"lang": {
+		"en_us": "Propeller"
+	},
+	"rarity": "COMMON",
+	"textures": {
+		"0": "fedora:block/propeller",
+		"particle": "fedora:block/propeller"
+	},
+	"elements": [
+		{
+			"from": [-4, 0, -4],
+			"to": [4, 2, 4],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 1], "texture": "#0"},
+				"east": {"uv": [12, 0, 16, 1], "texture": "#0"},
+				"south": {"uv": [4, 0, 8, 1], "texture": "#0"},
+				"west": {"uv": [8, 0, 12, 1], "texture": "#0"},
+				"up": {"uv": [4, 5, 0, 1], "texture": "#0"},
+				"down": {"uv": [4, 1, 0, 5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-3, 2, -3],
+			"to": [3, 3, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
+			"faces": {
+				"north": {"uv": [4, 1, 7, 2], "texture": "#0"},
+				"east": {"uv": [13, 1, 16, 2], "texture": "#0"},
+				"south": {"uv": [7, 1, 10, 2], "texture": "#0"},
+				"west": {"uv": [10, 1, 13, 2], "texture": "#0"},
+				"up": {"uv": [7, 5, 4, 2], "texture": "#0"},
+				"down": {"uv": [7, 2, 4, 5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-0.25, 3, -0.25],
+			"to": [0.25, 5.5, 0.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.25, 11, 8.25]},
+			"faces": {
+				"north": {"uv": [7, 2, 8, 3], "texture": "#0"},
+				"east": {"uv": [7, 2, 8, 3], "texture": "#0"},
+				"south": {"uv": [7, 2, 8, 3], "texture": "#0"},
+				"west": {"uv": [7, 2, 8, 3], "texture": "#0"},
+				"up": {"uv": [7, 2, 8, 3], "texture": "#0"},
+				"down": {"uv": [7, 2, 8, 3], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-3.5, 5, -3.5],
+			"to": [3.5, 5, 3.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 13, 7.5]},
+			"faces": {
+				"north": {"uv": [0, 0, 3.5, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 3.5, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 3.5, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 3.5, 0], "texture": "#0"},
+				"up": {"uv": [7, 12, 0, 5], "texture": "#0"},
+				"down": {"uv": [7, 5, 0, 12], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [12.8, 19.2, 12.8],
+			"scale": [1.6, 1.6, 1.6]
+		}
+	}
+}

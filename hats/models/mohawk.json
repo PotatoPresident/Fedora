@@ -1,0 +1,32 @@
+{
+	"credit": "Potatoboy9999",
+	"lang": {
+		"en_us": "Mohawk"
+	},
+	"rarity": "UNCOMMON",
+	"textures": {
+		"0": "fedora:block/mohawk",
+		"particle": "fedora:block/mohawk"
+	},
+	"elements": [
+		{
+			"from": [0, -4, -7],
+			"to": [0, 12, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 4, 1]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#0"},
+				"up": {"uv": [0, 16, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 16], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [12.8, 19.2, 12.8],
+			"scale": [1.6, 1.6, 1.6]
+		}
+	}
+}

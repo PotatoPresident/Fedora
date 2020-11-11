@@ -46,15 +46,18 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
         M model = getContextModel();
 
         if (entity.isBaby()) {
+            matrices.pop();
+            return;
+
+            /*
             if (model instanceof ModelWithHead) {
                 matrices.translate(0.0D, 0.03125D, 0.0D);
                 matrices.scale(0.7F, 0.7F, 0.7F);
                 matrices.translate(0.0D, 1.0D, 0.0D);
             } else {
                 //TODO deal with baby's
-                matrices.pop();
-                return;
             }
+             */
         }
 
         if (model instanceof ModelWithHead) {

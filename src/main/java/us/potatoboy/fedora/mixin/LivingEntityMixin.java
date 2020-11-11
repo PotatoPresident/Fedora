@@ -20,6 +20,7 @@ public abstract class LivingEntityMixin {
         if (!livingEntity.world.isClient) {
             if (adversary instanceof PlayerEntity) {
                 if (Fedora.config.isBlacklisted(Registry.ENTITY_TYPE.getId(livingEntity.getType()))) return;
+                if (livingEntity.isBaby()) return;
 
                 PlayerEntity player = (PlayerEntity) adversary;
                 Hat hat = Fedora.ENTITY_HAT_COMPONENT.get(livingEntity).getCurrentHat();

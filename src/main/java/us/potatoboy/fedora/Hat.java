@@ -18,14 +18,14 @@ public class Hat {
 
     @Environment(EnvType.CLIENT)
     public ModelIdentifier getModelId() {
-        return new ModelIdentifier("fedora:" + id);
+        return new ModelIdentifier(Fedora.MOD_ID + ":" + id);
     }
 
     public enum Rarity {
         COMMON(10, Formatting.WHITE),
-        UNCOMMON(8, Formatting.GREEN),
+        UNCOMMON(8, Formatting.YELLOW),
         RARE(4, Formatting.AQUA),
-        LEGENDARY(1, Formatting.GOLD);
+        EPIC(1, Formatting.DARK_PURPLE);
 
         private int weight;
         private Formatting formatting;

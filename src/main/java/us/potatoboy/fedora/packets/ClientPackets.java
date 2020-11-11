@@ -12,6 +12,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatLoader;
@@ -38,7 +39,7 @@ public class ClientPackets {
                 Hat hat = HatManager.getFromID(hatId);
 
                 MinecraftClient.getInstance().getToastManager().add(new HatToast(
-                        new TranslatableText("toast.fedora.hatunlocked"),
+                        new TranslatableText("toast.fedora.hatunlocked").formatted(hat.rarity == Hat.Rarity.COMMON ? Formatting.RESET : hat.rarity.getFormatting()),
                         hat.id,
                         30,
                         hat.rarity

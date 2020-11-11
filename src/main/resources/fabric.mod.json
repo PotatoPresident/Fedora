@@ -8,8 +8,11 @@
     "Potatoboy9999"
   ],
   "contact": {
-    "website": "test",
-    "repo": "test"
+    "website": "https://www.curseforge.com/minecraft/mc-mods/fedora",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/fedora",
+    "sources": "https://github.com/PotatoPresident/Fedora",
+    "repo": "https://github.com/PotatoPresident/Fedora",
+    "issues": "https://github.com/PotatoPresident/Fedora/issues"
   },
   "license": "MIT",
   "icon": "fedoraIcon.png",
@@ -34,14 +37,15 @@
   "mixins": [
     "fedora.mixins.json"
   ],
-  "custom": {
-    "cardinal-components": [
-      "fedora:hats"
-    ]
-  },
   "depends": {
     "fabricloader": ">=0.10.1+build.209",
     "fabric": "*",
     "minecraft": "1.16.3"
+  },
+  "custom": {
+    "cardinal-components": [
+      "fedora:player_hat",
+      "fedora:entity_hat"
+    ]
   }
 }
