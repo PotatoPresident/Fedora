@@ -6,13 +6,33 @@
     "pizza",
     "top_hat",
     "pig",
-    "astronaut"
+    "astronaut",
+    "baby_tree",
+    "cow",
+    "headphones",
+    "mohawk",
+    "mushroom",
+    "propeller",
+    "rock",
+    "rocket",
+    "sword"
   ],
   "textures": [
     "box",
     "fedora",
     "lil_tater",
     "pizza",
-    "antenna"
+    "antenna",
+    "cow",
+    "dirt",
+    "grass",
+    "headphone",
+    "leaf",
+    "log",
+    "mohawk",
+    "propeller",
+    "rock",
+    "rocket",
+    "sword"
   ]
 }
