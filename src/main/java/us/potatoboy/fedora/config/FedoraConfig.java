@@ -17,7 +17,8 @@ public class FedoraConfig implements ConfigData {
 
     public boolean autoDownload = true;
 
-    public int hatChance = 4;
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+    public int hatChance = 25;
 
     public boolean moddedHats = true;
 

@@ -51,7 +51,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
 
 
         if (!hatsFolder.isDirectory()) {
-            LOGGER.info("Not hats installed, downloading hats from server");
+            LOGGER.info("No hats installed, downloading hats from server");
             downloadHatsFromServer();
         } else if (config.autoDownload) {
             if (config.hatVer < serverVer) {

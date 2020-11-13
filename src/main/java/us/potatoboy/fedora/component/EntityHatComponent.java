@@ -17,7 +17,7 @@ public class EntityHatComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     public EntityHatComponent() {
-        if (new Random().nextInt(Fedora.config.hatChance) == 0) {
+        if (new Random().nextInt(100) < Fedora.config.hatChance) {
             currentHat = HatManager.getWeightedRandomHat();
         } else {
             currentHat = null;
