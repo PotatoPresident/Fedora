@@ -10,6 +10,7 @@ import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
@@ -40,14 +41,23 @@ public class PlayerHatFeatureRenderer extends FeatureRenderer<AbstractClientPlay
         BakedModel bakedModel = MinecraftClient.getInstance().getBakedModelManager().getModel(id);
 
         matrices.push();
+
         context.getModel().getHead().rotate(matrices);
-        matrices.translate(0.0D, -0.5D, 0.0D);
+
+        matrices.translate(0.0D, -0.25D, 0.0D);
+        matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
+        matrices.scale(0.625F, -0.625F, -0.625F);
+
+        bakedModel.getTransformation().getTransformation(ModelTransformation.Mode.HEAD).apply(false, matrices);
+
+        matrices.translate(-0.5D, -0.5D, -0.5D);
+
         ItemStack itemStack = entity.getEquippedStack(EquipmentSlot.HEAD);
         if (!itemStack.isEmpty()) {
-            matrices.translate(0D, -0.05D, 0D);
+            //matrices.translate(0D, -0.05D, 0D);
         }
 
-        matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180.0F));
+        //matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180.0F));
         MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getCutout()), null, bakedModel, 0.0F, 0.0F, 0.0F, light, 0);
         matrices.pop();
     }

@@ -11,6 +11,7 @@ import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
 import org.lwjgl.glfw.GLFW;
@@ -123,5 +124,6 @@ public class FedoraClient implements ClientModInitializer {
         registerHelper(IronGolemEntity.class, new HatHelper(0.25, 0, 0, 1F));
         registerHelper(TraderLlamaEntity.class, new HatHelper(0.5, 0.2, 0, 1F));
         registerHelper(ShulkerEntity.class, new HatHelper(0.3, 0, 0, 1));
+        registerHelper(WitherEntity.class, new HatHelper(-0.25, 0, 0, 1F));
     }
 }

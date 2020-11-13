@@ -8,11 +8,11 @@ import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.*;
 import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -83,12 +83,13 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
             head.rotate(matrices);
         }
 
-        matrices.translate(0.0D, -0.5D, 0.0D);
-        matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180.0F));
+        matrices.translate(0.0D, -0.25D, 0.0D);
+        matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
+        matrices.scale(0.625F, -0.625F, -0.625F);
 
-        if (entity instanceof WitherEntity) {
-            helper = new HatHelper(-0.25, 0, 0, 1F);
-        }
+        bakedModel.getTransformation().getTransformation(ModelTransformation.Mode.HEAD).apply(false, matrices);
+
+        matrices.translate(-0.5D, -0.5D, -0.5D);
 
         if (helper != null) {
             matrices.scale(helper.getScale(), helper.getScale(), helper.getScale());

@@ -152,5 +152,11 @@
 			"origin": [3, 6, -5],
 			"children": [6]
 		}
-	]
+	],
+	"display": {
+		"head": {
+			"translation": [12.8, 19.2, 12.8],
+			"scale": [1.6, 1.6, 1.6]
+		}
+	}
 }

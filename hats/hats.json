@@ -15,7 +15,8 @@
     "propeller",
     "rock",
     "rocket",
-    "sword"
+    "sword",
+    "horns"
   ],
   "textures": [
     "box",
@@ -33,6 +34,7 @@
     "propeller",
     "rock",
     "rocket",
-    "sword"
+    "sword",
+    "horns"
   ]
 }
