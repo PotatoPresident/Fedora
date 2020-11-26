@@ -9,11 +9,13 @@ public class Hat {
     public final String id;
     public final String creator;
     public final Rarity rarity;
+    public final Boolean translucent;
 
-    public Hat(String id, String creator, Rarity rarity) {
+    public Hat(String id, String creator, Rarity rarity, Boolean translucent) {
         this.id = id;
         this.creator = creator;
         this.rarity = rarity;
+        this.translucent = translucent;
     }
 
     @Environment(EnvType.CLIENT)

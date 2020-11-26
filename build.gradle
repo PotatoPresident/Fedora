@@ -63,6 +63,10 @@ dependencies {
     modImplementation "io.github.prospector:modmenu:1.14.6+build.31"
 }
 
+minecraft {
+    accessWidener "src/main/resources/fedora.accesswidener"
+}
+
 processResources {
     inputs.property "version", project.version
 

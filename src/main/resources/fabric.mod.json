@@ -40,12 +40,13 @@
   "depends": {
     "fabricloader": ">=0.10.1+build.209",
     "fabric": "*",
-    "minecraft": "1.16.3"
+    "minecraft": "^1.16.3"
   },
   "custom": {
     "cardinal-components": [
       "fedora:player_hat",
       "fedora:entity_hat"
     ]
-  }
+  },
+  "accessWidener": "fedora.accesswidener"
 }

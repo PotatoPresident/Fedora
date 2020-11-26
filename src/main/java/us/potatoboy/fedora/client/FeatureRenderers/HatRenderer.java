@@ -9,10 +9,12 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.*;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.render.model.json.Transformation;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -20,7 +22,9 @@ import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.client.FedoraClient;
 import us.potatoboy.fedora.client.HatHelper;
-import us.potatoboy.fedora.mixin.*;
+import us.potatoboy.fedora.mixin.LlamaHeadAccessor;
+import us.potatoboy.fedora.mixin.RabbitHeadAccessor;
+import us.potatoboy.fedora.mixin.RavagerHeadAccessor;
 
 public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
     public HatRenderer(FeatureRendererContext<T, M> context) {
@@ -62,20 +66,30 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
 
         if (model instanceof ModelWithHead) {
             head = ((ModelWithHead) model).getHead();
-        } else if (model instanceof AnimalModel && !(model instanceof BeeEntityModel)) {
-            head = ((AnimalModelHeadInvoker)model).getHeadParts().iterator().next();
+        } else if (model instanceof BeeEntityModel) {
+            head = ((BeeEntityModel<?>) model).getBodyParts().iterator().next();
+        } else if (model instanceof AnimalModel && !(entity instanceof BeeEntity)) {
+            head = ((AnimalModel<?>) model).getHeadParts().iterator().next();
         } else if (model instanceof LlamaEntityModel) {
             head = ((LlamaHeadAccessor)model).getHead();
         } else if (model instanceof RabbitEntityModel) {
             head = ((RabbitHeadAccessor) model).getHead();
-        } else if (model instanceof SnowGolemEntityModel) {
-            head = ((SnowHeadAccessor) model).getHead();
         } else if (model instanceof RavagerEntityModel) {
             head = ((RavagerHeadAccessor) model).getHead();
         } else if (model instanceof CompositeEntityModel) {
+            int i = 0;
             for (ModelPart part : ((CompositeEntityModel<?>) model).getParts()) {
-                head = part;
-                break;
+                if (helper != null) {
+                    if (i == helper.getHeadIndex()) {
+                        head = part;
+                        break;
+                    }
+                } else {
+                    head = part;
+                    break;
+                }
+
+                i++;
             }
         }
 
@@ -87,16 +101,17 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
         matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
         matrices.scale(0.625F, -0.625F, -0.625F);
 
-        bakedModel.getTransformation().getTransformation(ModelTransformation.Mode.HEAD).apply(false, matrices);
-
-        matrices.translate(-0.5D, -0.5D, -0.5D);
-
         if (helper != null) {
             matrices.scale(helper.getScale(), helper.getScale(), helper.getScale());
             matrices.translate(helper.getSideOffset(), helper.getHeightOffset(), -helper.getForwardOffset());
         }
 
-        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getCutout()), null, bakedModel, 0.0F, 0.0F, 0.0F, light, 0);
+        Transformation transformation = bakedModel.getTransformation().getTransformation(ModelTransformation.Mode.HEAD);
+        transformation.apply(false, matrices);
+
+        matrices.translate(-0.5D, -0.5D, -0.5D);
+
+        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(hat.translucent ? RenderLayer.getTranslucentMovingBlock() : RenderLayer.getCutout()), null, bakedModel, 0.0F, 0.0F, 0.0F, light, 0);
         matrices.pop();
     }
 }

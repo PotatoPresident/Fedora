@@ -57,8 +57,7 @@ public class PlayerHatFeatureRenderer extends FeatureRenderer<AbstractClientPlay
             //matrices.translate(0D, -0.05D, 0D);
         }
 
-        //matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180.0F));
-        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getCutout()), null, bakedModel, 0.0F, 0.0F, 0.0F, light, 0);
+        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(currentHat.translucent ? RenderLayer.getTranslucentMovingBlock() : RenderLayer.getCutout()), null, bakedModel, 0.0F, 0.0F, 0.0F, light, 0);
         matrices.pop();
     }
 }

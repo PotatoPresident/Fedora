@@ -16,7 +16,11 @@
     "rock",
     "rocket",
     "sword",
-    "horns"
+    "horns",
+    "cage",
+    "goggles",
+    "straw_hat",
+    "witch"
   ],
   "textures": [
     "box",
@@ -35,6 +39,9 @@
     "rock",
     "rocket",
     "sword",
-    "horns"
+    "horns",
+    "cage",
+    "goggles",
+    "straw_hat"
   ]
 }

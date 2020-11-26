@@ -26,9 +26,9 @@ public class HatCommand {
             LiteralCommandNode<ServerCommandSource> unlockNode = CommandManager
                     .literal("unlock")
                     .then(CommandManager.argument("target", EntityArgumentType.player())
-                    .then(CommandManager.argument("hat", StringArgumentType.greedyString())
-                    .suggests(new HatSuggestionProvider())
-                    .executes(HatCommand::unlock)))
+                            .then(CommandManager.argument("hat", StringArgumentType.greedyString())
+                                    .suggests(new HatSuggestionProvider())
+                                    .executes(HatCommand::unlock)))
                     .build();
 
             LiteralCommandNode<ServerCommandSource> removeNode = CommandManager

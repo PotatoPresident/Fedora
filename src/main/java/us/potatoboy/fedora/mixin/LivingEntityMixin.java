@@ -13,7 +13,6 @@ import us.potatoboy.fedora.Hat;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-
     @Inject(method = "onKilledBy", at = @At("HEAD"))
     private void onKilledBy(@Nullable LivingEntity adversary, CallbackInfo ci) {
         LivingEntity livingEntity = (LivingEntity) (Object)this;

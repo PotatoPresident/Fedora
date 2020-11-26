@@ -23,7 +23,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
     public PlayerHatComponent (PlayerEntity playerEntity) {
         this.playerEntity = playerEntity;
         unlockedHats = new ArrayList<>();
-        unlockedHats.add(new Hat("none", null, null));
+        unlockedHats.add(new Hat("none", null, null, false));
     }
 
     public Hat getCurrentHat() {
@@ -38,7 +38,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
     public ArrayList<Hat> getUnlockedHats() {
         if (playerEntity.isCreative()) {
             ArrayList<Hat> hats = new ArrayList<>(HatManager.getHatRegistry());
-            hats.add(0, new Hat("none", null, null));
+            hats.add(0, new Hat("none", null, null, false));
             return hats;
         }
 
@@ -79,7 +79,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
         if (compoundTag.contains("unlockedHats")) {
             unlockedHats = new ArrayList<>();
-            unlockedHats.add(new Hat("none", null, null));
+            unlockedHats.add(new Hat("none", null, null, false));
             ListTag listTag = compoundTag.getList("unlockedHats", 10);
             for(int i = 0; i < listTag.size(); ++i) {
                 String hatId = listTag.getCompound(i).getString("name");

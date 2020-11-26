@@ -77,6 +77,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
                 String hatName = FilenameUtils.removeExtension(file.getName()).toLowerCase();
                 String creator = "Unknown";
                 Hat.Rarity rarity = Hat.Rarity.COMMON;
+                Boolean translucent = false;
 
                 try {
                     JsonObject jsonObject = new JsonObject();
@@ -114,6 +115,12 @@ public class HatLoader implements RRPPreGenEntrypoint {
                         LOGGER.severe("Failed to read rarity for hat: " + file.getPath());
                     }
 
+                    try {
+                        translucent = jsonObject.get("translucent").getAsBoolean();
+                    } catch (Exception e) {
+                        //Didn't include it, not translucent
+                    }
+
                 } catch (IllegalStateException e) {
                     LOGGER.severe("Something went wrong loading hat: " + file.getPath());
                 }
@@ -122,7 +129,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
                     RESOURCE_PACK.addLang(new Identifier("fedora", id), jLang);
                 });
 
-                HatManager.registerHat(hatName, creator, rarity);
+                HatManager.registerHat(hatName, creator, rarity, translucent);
             }
         }
 

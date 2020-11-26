@@ -9,6 +9,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.TranslatableText;
@@ -72,7 +73,16 @@ public class ClientPackets {
                 passedData.writeString("END");
 
                 MinecraftClient.getInstance().execute(() -> {
-                    ClientSidePacketRegistry.INSTANCE.sendToServer(CommonPackets.REQUEST_HATS, passedData);
+                    MinecraftClient.getInstance().openScreen(new ConfirmScreen((accepted) -> {
+                        if (accepted) {
+                            ClientSidePacketRegistry.INSTANCE.sendToServer(CommonPackets.REQUEST_HATS, passedData);
+                        } else {
+                            //Server Hats declined
+                        }
+
+                        MinecraftClient.getInstance().openScreen(null);
+                    }, new TranslatableText("server.hatPrompt.title"), new TranslatableText("server.hatPrompt.desc")));
+
                 });
             }
         }));

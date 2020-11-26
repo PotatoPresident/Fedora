@@ -7,11 +7,9 @@
     "LivingEntityMixin"
   ],
   "client": [
-    "AnimalModelHeadInvoker",
     "LlamaHeadAccessor",
     "RabbitHeadAccessor",
-    "RavagerHeadAccessor",
-    "SnowHeadAccessor"
+    "RavagerHeadAccessor"
   ],
   "server": [
     "PlayerManagerMixin"
