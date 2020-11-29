@@ -169,14 +169,22 @@ public class HatLoader implements RRPPreGenEntrypoint {
 
             modelsFolder.mkdir();
             for (JsonElement model : models) {
-                File modelFile = new File(modelsFolder, model.getAsString() + ".json");
-                FileUtils.copyURLToFile(new URL("https://raw.githubusercontent.com/PotatoPresident/Fedora/master/hats/models/" + model.getAsString() + ".json"), modelFile, 10000, 10000);
+                try {
+                    File modelFile = new File(modelsFolder, model.getAsString() + ".json");
+                    FileUtils.copyURLToFile(new URL("https://raw.githubusercontent.com/PotatoPresident/Fedora/master/hats/models/" + model.getAsString() + ".json"), modelFile, 10000, 10000);
+                } catch (IOException e) {
+                    LOGGER.info("Failed to download model " + model.getAsString());
+                }
             }
 
             textFolder.mkdir();
             for (JsonElement texture : textures) {
-                File textureFile = new File(textFolder, texture.getAsString() + ".png");
-                FileUtils.copyURLToFile(new URL("https://raw.githubusercontent.com/PotatoPresident/Fedora/master/hats/textures/" + texture.getAsString() + ".png"), textureFile, 10000, 10000);
+                try {
+                    File textureFile = new File(textFolder, texture.getAsString() + ".png");
+                    FileUtils.copyURLToFile(new URL("https://raw.githubusercontent.com/PotatoPresident/Fedora/master/hats/textures/" + texture.getAsString() + ".png"), textureFile, 10000, 10000);
+                } catch (IOException e) {
+                    LOGGER.info("Failed to download texture " + texture.getAsString());
+                }
             }
         } catch (Exception e) {
             LOGGER.info("Failed to download hats from server");

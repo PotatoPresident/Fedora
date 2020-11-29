@@ -2,7 +2,7 @@
   "version": 1,
   "models": [
     "fedora",
-    "lil_tater",
+    "tiny_potato",
     "pizza",
     "top_hat",
     "pig",
@@ -25,7 +25,7 @@
   "textures": [
     "box",
     "fedora",
-    "lil_tater",
+    "tiny_potato",
     "pizza",
     "antenna",
     "cow",
