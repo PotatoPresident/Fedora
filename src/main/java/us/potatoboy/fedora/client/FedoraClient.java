@@ -102,8 +102,9 @@ public class FedoraClient implements ClientModInitializer {
         registerHelper(HorseBaseEntity.class, new HatHelper(0.3, 0, 0, 1F));
         registerHelper(GuardianEntity.class, new HatHelper(-1.6, 0, 0, 1F));
         registerHelper(EndermiteEntity.class, new HatHelper(-2.5, 0, 0, 0.2F));
-        registerHelper(IllagerEntity.class, new HatHelper(0.0625, 0, 0, 1F));
-        registerHelper(MerchantEntity.class, new HatHelper(0.0625, 0, 0, 1F));
+        registerHelper(IllagerEntity.class, new HatHelper(0.2, 0, 0, 1F));
+        registerHelper(MerchantEntity.class, new HatHelper(0.2, 0, 0, 1F));
+        registerHelper(VillagerEntity.class, new HatHelper(0.2, 0, 0, 1F));
         registerHelper(ZombieVillagerEntity.class, new HatHelper(0.0625, 0, 0, 1F));
         registerHelper(FoxEntity.class, new HatHelper(-0.6, 0.1, -0.1, 1F));
         registerHelper(GhastEntity.class, new HatHelper(-0.2, 0, 0, 2F));

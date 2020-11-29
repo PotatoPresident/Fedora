@@ -1,23 +1,23 @@
 {
 	"credit": "Potatoboy9999",
 	"lang": {
-		"en_us": "Lil Tater"
+		"en_us": "Tiny Potato"
 	},
 	"rarity": "RARE",
 	"textures": {
-		"0": "fedora:block/lil_tater",
-		"particle": "fedora:block/lil_tater"
+		"0": "fedora:block/tiny_potato",
+		"particle": "fedora:block/tiny_potato"
 	},
 	"elements": [
 		{
 			"from": [-1, 0, -1],
-			"to": [1, 4, 1],
+			"to": [1, 3, 1],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 8, 7]},
 			"faces": {
-				"north": {"uv": [4, 4, 8, 11], "texture": "#0"},
-				"east": {"uv": [0, 4, 4, 11], "texture": "#0"},
-				"south": {"uv": [12, 4, 16, 11], "texture": "#0"},
-				"west": {"uv": [8, 4, 12, 11], "texture": "#0"},
+				"north": {"uv": [4, 4, 8, 10], "texture": "#0"},
+				"east": {"uv": [0, 4, 4, 10], "texture": "#0"},
+				"south": {"uv": [12, 4, 16, 10], "texture": "#0"},
+				"west": {"uv": [8, 4, 12, 10], "texture": "#0"},
 				"up": {"uv": [4, 0, 8, 4], "texture": "#0"},
 				"down": {"uv": [8, 0, 12, 4], "texture": "#0"}
 			}

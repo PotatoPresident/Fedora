@@ -5,6 +5,8 @@ A hat mod for fabric!
 # License
 MIT
 
+Tiny Potato is a texture by Vazkii
+
 # Creating custom hats
 Guide [here](https://github.com/PotatoPresident/Fedora/wiki/Creating-a-custom-hat)
 
