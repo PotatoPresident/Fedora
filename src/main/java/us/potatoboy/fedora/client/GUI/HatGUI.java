@@ -18,6 +18,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
+import us.potatoboy.fedora.client.FedoraClient;
 import us.potatoboy.fedora.packets.CommonPackets;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class HatGUI extends LightweightGuiDescription {
         currentHat = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getCurrentHat();
         unlockedHats = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getUnlockedHats();
 
-        int tempPages = (unlockedHats.size() +6) / 7;
+        int tempPages = (unlockedHats.size() + 6) / 7;
         if (tempPages == 0) tempPages = 1;
         pages = tempPages;
 
@@ -81,6 +82,10 @@ public class HatGUI extends LightweightGuiDescription {
                 PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
                 passedData.writeString(currentHat.id);
                 ClientSidePacketRegistry.INSTANCE.sendToServer(CommonPackets.SET_HAT, passedData);
+
+                if (!FedoraClient.currentSession.isOnServer()) {
+                    Fedora.PLAYER_HAT_COMPONENT.get(MinecraftClient.getInstance().player).setCurrentHat(currentHat);
+                }
             });
 
             root.add(hatChoice, 85, 25 + (i * 25));

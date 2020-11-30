@@ -3,7 +3,9 @@ package us.potatoboy.fedora.component;
 import dev.onyxstudios.cca.api.v3.component.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
 import io.netty.buffer.Unpooled;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -11,6 +13,7 @@ import net.minecraft.network.PacketByteBuf;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatManager;
+import us.potatoboy.fedora.client.FedoraClient;
 import us.potatoboy.fedora.packets.CommonPackets;
 
 import java.util.ArrayList;
@@ -37,9 +40,36 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
     public ArrayList<Hat> getUnlockedHats() {
         if (playerEntity.isCreative()) {
-            ArrayList<Hat> hats = new ArrayList<>(HatManager.getHatRegistry());
+            ArrayList<Hat> hats;
+            if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+                hats = new ArrayList<>(FedoraClient.currentSession.getSessionHats());
+            } else {
+                hats = new ArrayList<>(HatManager.getHatRegistry());
+            }
+
             hats.add(0, new Hat("none", null, null, false));
             return hats;
+        }
+
+        ArrayList<Hat> hats;
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+            if (playerEntity.isCreative()) {
+                hats = new ArrayList<>(FedoraClient.currentSession.getSessionHats());
+                hats.add(0, new Hat("none", null, null, false));
+                return hats;
+            }
+
+            if (!FedoraClient.currentSession.isOnServer()) {
+                hats = new ArrayList<>(HatManager.getHatRegistry());
+                hats.add(0, new Hat("none", null, null, false));
+                return hats;
+            }
+        } else {
+            if (playerEntity.isCreative()) {
+                hats = new ArrayList<>(HatManager.getHatRegistry());
+                hats.add(0, new Hat("none", null, null, false));
+                return hats;
+            }
         }
 
         return unlockedHats;

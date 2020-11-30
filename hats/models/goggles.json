@@ -4,6 +4,7 @@
 		"en_us": "Goggles"
 	},
 	"rarity": "UNCOMMON",
+	"translucent": true,
 	"textures": {
 		"0": "fedora:block/goggles",
 		"particle": "fedora:block/goggles"

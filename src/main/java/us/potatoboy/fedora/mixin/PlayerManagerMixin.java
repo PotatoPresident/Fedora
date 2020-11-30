@@ -20,7 +20,7 @@ import us.potatoboy.fedora.packets.CommonPackets;
 @Environment(EnvType.SERVER)
 public abstract class PlayerManagerMixin {
 
-    @Inject(method = "onPlayerConnect", at = @At("TAIL"))
+    @Inject(method = "onPlayerConnect", at = @At("RETURN"))
     private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
         PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
         for (Hat hat : HatManager.getHatRegistry()) {

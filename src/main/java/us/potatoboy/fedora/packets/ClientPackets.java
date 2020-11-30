@@ -18,7 +18,9 @@ import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatLoader;
 import us.potatoboy.fedora.HatManager;
+import us.potatoboy.fedora.client.FedoraClient;
 import us.potatoboy.fedora.client.GUI.HatToast;
+import us.potatoboy.fedora.client.Session;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -49,8 +51,6 @@ public class ClientPackets {
         }));
 
         ClientSidePacketRegistry.INSTANCE.register(CommonPackets.HAT_LIST, ((packetContext, packetByteBuf) -> {
-            if (Fedora.config.serverHats == false) return;
-
             HashSet<String> serverHats = new HashSet<>();
 
             String hatId = packetByteBuf.readString();
@@ -62,12 +62,16 @@ public class ClientPackets {
             PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
             Boolean needsHats = false;
             for (String serverHatId : serverHats) {
+                Hat hat = HatManager.getFromID(serverHatId);
 
-                if (HatManager.getFromID(serverHatId) == null) {
+                if (hat == null) {
                     passedData.writeString(serverHatId);
                     needsHats = true;
                 }
             }
+            FedoraClient.currentSession = new Session(serverHats);
+
+            if (Fedora.config.serverHats == false) return;
 
             if (needsHats) {
                 passedData.writeString("END");

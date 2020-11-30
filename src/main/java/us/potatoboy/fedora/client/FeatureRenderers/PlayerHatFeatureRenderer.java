@@ -33,6 +33,7 @@ public class PlayerHatFeatureRenderer extends FeatureRenderer<AbstractClientPlay
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         PlayerHatComponent hatComponent = Fedora.PLAYER_HAT_COMPONENT.get(entity);
         Hat currentHat = hatComponent.getCurrentHat();
+
         if (currentHat == null) {
             return;
         }

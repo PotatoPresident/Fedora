@@ -27,6 +27,7 @@ import java.util.HashMap;
 @Environment(EnvType.CLIENT)
 public class FedoraClient implements ClientModInitializer {
     private static HashMap<Class, HatHelper> HAT_HELPERS = new HashMap<>();
+    public static Session currentSession;
 
     @Override
     public void onInitializeClient() {

@@ -53,6 +53,8 @@ public class HatLoader implements RRPPreGenEntrypoint {
         if (!hatsFolder.isDirectory()) {
             LOGGER.info("No hats installed, downloading hats from server");
             downloadHatsFromServer();
+            config.hatVer = serverVer;
+            AutoConfig.getConfigHolder(FedoraConfig.class).save();
         } else if (config.autoDownload) {
             if (config.hatVer < serverVer) {
                 LOGGER.info("New hats available on server. Downloading");
