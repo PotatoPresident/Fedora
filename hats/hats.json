@@ -20,7 +20,8 @@
     "cage",
     "goggles",
     "straw_hat",
-    "witch"
+    "witch",
+    "horn"
   ],
   "textures": [
     "box",
@@ -42,6 +43,7 @@
     "horns",
     "cage",
     "goggles",
-    "straw_hat"
+    "straw_hat",
+    "horn"
   ]
 }

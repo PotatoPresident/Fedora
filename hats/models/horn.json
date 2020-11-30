@@ -1,0 +1,59 @@
+{
+	"credit": "Potatoboy9999",
+	"lang": {
+		"en_us": "Horn"
+	},
+	"rarity": "UNCOMMON",
+	"textures": {
+		"0": "fedora:block/horn",
+		"particle": "fedora:block/horn"
+	},
+	"elements": [
+		{
+			"from": [0, 4, 0],
+			"to": [2, 7, 2],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 12, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 2, 3], "texture": "#0"},
+				"east": {"uv": [0, 0, 2, 3], "texture": "#0"},
+				"south": {"uv": [0, 0, 2, 3], "texture": "#0"},
+				"west": {"uv": [0, 0, 2, 3], "texture": "#0"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0.25, 4, 2.75],
+			"to": [1.75, 7, 4.25],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8.25, 12, 10.75]},
+			"faces": {
+				"north": {"uv": [2, 0, 4, 3], "texture": "#0"},
+				"east": {"uv": [2, 0, 4, 3], "texture": "#0"},
+				"south": {"uv": [2, 0, 4, 3], "texture": "#0"},
+				"west": {"uv": [2, 0, 4, 3], "texture": "#0"},
+				"up": {"uv": [0, 0, 1.5, 1.5], "texture": "#0"},
+				"down": {"uv": [0, 0, 1.5, 1.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0.5, 7, 3],
+			"to": [1.5, 8.25, 4],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8.25, 15, 10.75]},
+			"faces": {
+				"north": {"uv": [1, 1, 2, 2.3], "texture": "#0"},
+				"east": {"uv": [1, 1, 2, 2.3], "texture": "#0"},
+				"south": {"uv": [1, 1, 2, 2.3], "texture": "#0"},
+				"west": {"uv": [1, 1, 2, 2.3], "texture": "#0"},
+				"up": {"uv": [1, 1, 2, 2], "texture": "#0"},
+				"down": {"uv": [1, 1, 2, 2], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"rotation": [-21, 0, 0],
+			"translation": [14, 18.25, -2.75],
+			"scale": [2, 2, 2]
+		}
+	}
+}
