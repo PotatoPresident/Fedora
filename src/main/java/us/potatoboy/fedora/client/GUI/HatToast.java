@@ -15,7 +15,6 @@ public class HatToast implements Toast {
     private Text desc;
     private long startTime;
     private boolean justUpdated;
-    private final int width;
     private Hat.Rarity rarity;
 
     private Identifier TEXT = new Identifier(Fedora.MOD_ID, "textures/gui/hat_toast.png");
@@ -23,7 +22,6 @@ public class HatToast implements Toast {
     public HatToast(Text title, String hatId, int width, Hat.Rarity rarity) {
         this.title = title;
         this.desc = new TranslatableText("fedora.hat." + hatId);
-        this.width = width;
         this.rarity = rarity;
     }
 
