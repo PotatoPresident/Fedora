@@ -110,7 +110,7 @@ public class FedoraClient implements ClientModInitializer {
         registerHelper(PandaEntity.class, new HatHelper(-0.3, 0, 0, 1F));
         registerHelper(ParrotEntity.class, new HatHelper(-0.9, 0.4, 0, 0.3F, 4));
         registerHelper(PhantomEntity.class, new HatHelper(-0.6, 0.2, 0, 1F));
-        registerHelper(PigEntity.class, new HatHelper(-0.4, 0.2, 0, 1F));
+        registerHelper(PigEntity.class, new HatHelper(-0.4, 0.4, 0, 1F));
         registerHelper(PolarBearEntity.class, new HatHelper(-0.5, 0, 0, 1F));
         registerHelper(PufferfishEntity.class, new HatHelper(-1.4, 0, 0, 0.2F));
         registerHelper(RabbitEntity.class, new HatHelper(-1.4, 0.2, 0, 0.5F));
