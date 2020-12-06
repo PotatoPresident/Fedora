@@ -8,10 +8,7 @@
   ],
   "client": [
     "ClientDisconnectMixin",
-    "ClientJoinMixin",
-    "LlamaHeadAccessor",
-    "RabbitHeadAccessor",
-    "RavagerHeadAccessor"
+    "ClientJoinMixin"
   ],
   "server": [
     "PlayerManagerMixin"
