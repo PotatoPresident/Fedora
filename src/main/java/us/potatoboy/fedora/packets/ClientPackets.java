@@ -41,7 +41,6 @@ public class ClientPackets {
             packetContext.getTaskQueue().execute(() -> {
                 Hat hat = HatManager.getFromID(hatId);
 
-                assert hat != null;
                 MinecraftClient.getInstance().getToastManager().add(new HatToast(
                         new TranslatableText("toast.fedora.hatunlocked").formatted(hat.rarity == Hat.Rarity.COMMON ? Formatting.RESET : hat.rarity.getFormatting()),
                         hat.id,

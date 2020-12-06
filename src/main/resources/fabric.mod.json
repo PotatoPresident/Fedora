@@ -3,7 +3,7 @@
   "id": "fedora",
   "version": "${version}",
   "name": "Fedora",
-  "description": "Adds hats for the player and all mobs",
+  "description": "Adds hats",
   "authors": [
     "Potatoboy9999"
   ],

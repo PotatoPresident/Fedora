@@ -31,8 +31,8 @@ public class WEntity extends WWidget {
 
         mouseX = -mouseX + (width/2);
         mouseY = -mouseY + (height/2);
-        float f = (float)Math.atan(mouseX / 40.0F);
-        float g = (float)Math.atan(mouseY / 40.0F);
+        float f = (float)Math.atan((double)(mouseX / 40.0F));
+        float g = (float)Math.atan((double)(mouseY / 40.0F));
         RenderSystem.pushMatrix();
         RenderSystem.translatef((float)(width/2)+x, (float)height+y-10, 1050.0F);
         RenderSystem.scalef(1.0F, 1.0F, -1.0F);
