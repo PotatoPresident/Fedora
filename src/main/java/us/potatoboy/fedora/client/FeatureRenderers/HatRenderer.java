@@ -14,7 +14,6 @@ import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -22,11 +21,12 @@ import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.client.FedoraClient;
 import us.potatoboy.fedora.client.HatHelper;
-import us.potatoboy.fedora.mixin.LlamaHeadAccessor;
-import us.potatoboy.fedora.mixin.RabbitHeadAccessor;
-import us.potatoboy.fedora.mixin.RavagerHeadAccessor;
+
+import java.lang.reflect.Field;
 
 public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
+    private Field headField;
+
     public HatRenderer(FeatureRendererContext<T, M> context) {
         super(context);
     }
@@ -46,7 +46,6 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
 
         matrices.push();
 
-        ModelPart head = null;
         M model = getContextModel();
 
         if (entity.isBaby()) {
@@ -64,32 +63,48 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
              */
         }
 
-        if (model instanceof ModelWithHead) {
-            head = ((ModelWithHead) model).getHead();
-        } else if (model instanceof BeeEntityModel) {
-            head = ((BeeEntityModel<?>) model).getBodyParts().iterator().next();
-        } else if (model instanceof AnimalModel && !(entity instanceof BeeEntity)) {
-            head = ((AnimalModel<?>) model).getHeadParts().iterator().next();
-        } else if (model instanceof LlamaEntityModel) {
-            head = ((LlamaHeadAccessor)model).getHead();
-        } else if (model instanceof RabbitEntityModel) {
-            head = ((RabbitHeadAccessor) model).getHead();
-        } else if (model instanceof RavagerEntityModel) {
-            head = ((RavagerHeadAccessor) model).getHead();
-        } else if (model instanceof CompositeEntityModel) {
-            int i = 0;
-            for (ModelPart part : ((CompositeEntityModel<?>) model).getParts()) {
-                if (helper != null) {
-                    if (i == helper.getHeadIndex()) {
+        try {
+            if (headField == null) {
+                headField = model.getClass().getDeclaredField("head");
+                headField.setAccessible(true);
+            }
+        } catch (NoSuchFieldException e) {
+            //No head field
+        }
+
+
+        ModelPart head = null;
+
+        if (headField != null) {
+            try {
+                head = (ModelPart) headField.get(model);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (head == null) {
+            if (model instanceof ModelWithHead) {
+                head = ((ModelWithHead) model).getHead();
+            } else if (model instanceof BeeEntityModel) {
+                head = ((BeeEntityModel<?>) model).getBodyParts().iterator().next();
+            } else if (model instanceof AnimalModel) {
+                head = ((AnimalModel<?>) model).getHeadParts().iterator().next();
+            } else if (model instanceof CompositeEntityModel) {
+                int i = 0;
+                for (ModelPart part : ((CompositeEntityModel<?>) model).getParts()) {
+                    if (helper != null) {
+                        if (i == helper.getHeadIndex()) {
+                            head = part;
+                            break;
+                        }
+                    } else {
                         head = part;
                         break;
                     }
-                } else {
-                    head = part;
-                    break;
-                }
 
-                i++;
+                    i++;
+                }
             }
         }
 

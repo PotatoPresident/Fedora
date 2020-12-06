@@ -10,7 +10,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -27,13 +26,11 @@ public class HatGUI extends LightweightGuiDescription {
     private Hat currentHat = null;
     private int currentPage = 0;
     private final int pages;
-    private PlayerEntity playerEntity;
     private ArrayList<Hat> unlockedHats;
 
     private final Identifier INFO = new Identifier(Fedora.MOD_ID, "textures/gui/info_icon.png");
 
     public HatGUI(ClientPlayerEntity playerEntity) {
-        this.playerEntity = playerEntity;
         currentHat = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getCurrentHat();
         unlockedHats = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getUnlockedHats();
 

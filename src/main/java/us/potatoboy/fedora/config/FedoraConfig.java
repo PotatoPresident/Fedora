@@ -18,11 +18,11 @@ public class FedoraConfig implements ConfigData {
     public boolean autoDownload = true;
 
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
-    public int hatChance = 25;
+    public int hatChance = 15;
 
     public boolean moddedHats = true;
 
-    public List<String> hatBlacklist = Arrays.asList("minecraft:armor_stand", "minecraft:witch");
+    public List<String> hatBlacklist = Arrays.asList("minecraft:armor_stand", "minecraft:witch", "minecraft:shulker");
 
     public Boolean isBlacklisted(Identifier identifier) {
         for (String entity : hatBlacklist) {

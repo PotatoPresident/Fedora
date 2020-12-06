@@ -2,6 +2,7 @@ package us.potatoboy.fedora.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatManager;
 
@@ -35,6 +36,9 @@ public class Session {
     }
 
     public boolean isOnServer() {
+        if (MinecraftClient.getInstance().isIntegratedServerRunning()) {
+            return true;
+        }
         return serverHats != null;
     }
 }

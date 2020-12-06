@@ -62,11 +62,6 @@ public class FedoraClient implements ClientModInitializer {
             }
         });
 
-        /*
-        TODO make Hat helpers data driven
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new EntityHatHelpers());
-         */
-
         registerVanillaHelpers();
     }
 
@@ -115,7 +110,7 @@ public class FedoraClient implements ClientModInitializer {
         registerHelper(PandaEntity.class, new HatHelper(-0.3, 0, 0, 1F));
         registerHelper(ParrotEntity.class, new HatHelper(-0.9, 0.4, 0, 0.3F, 4));
         registerHelper(PhantomEntity.class, new HatHelper(-0.6, 0.2, 0, 1F));
-        registerHelper(PigEntity.class, new HatHelper(-0.4, 0.2, 0, 1F));
+        registerHelper(PigEntity.class, new HatHelper(-0.4, 0.4, 0, 1F));
         registerHelper(PolarBearEntity.class, new HatHelper(-0.5, 0, 0, 1F));
         registerHelper(PufferfishEntity.class, new HatHelper(-1.4, 0, 0, 0.2F));
         registerHelper(RabbitEntity.class, new HatHelper(-1.4, 0.2, 0, 0.5F));
@@ -133,7 +128,6 @@ public class FedoraClient implements ClientModInitializer {
         registerHelper(BatEntity.class, new HatHelper(-0.5, 0, 0, 1F));
         registerHelper(IronGolemEntity.class, new HatHelper(0.4, 0.2, 0, 1F));
         registerHelper(TraderLlamaEntity.class, new HatHelper(0.5, 0.2, 0, 1F));
-        registerHelper(ShulkerEntity.class, new HatHelper(0.3, 0, 0, 1));
         registerHelper(WitherEntity.class, new HatHelper(-0.4, 0, 0, 1F));
         registerHelper(SnowGolemEntity.class, new HatHelper(-0.1, 0 , 0, 1F, 2));
     }
