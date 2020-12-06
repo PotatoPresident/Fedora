@@ -23,7 +23,7 @@ import us.potatoboy.fedora.packets.CommonPackets;
 import java.util.ArrayList;
 
 public class HatGUI extends LightweightGuiDescription {
-    private Hat currentHat = null;
+    private Hat currentHat;
     private int currentPage = 0;
     private final int pages;
     private ArrayList<Hat> unlockedHats;
@@ -132,6 +132,7 @@ public class HatGUI extends LightweightGuiDescription {
             textList.add(new TranslatableText("fedora.text.rarity", new LiteralText(hat.rarity.name()).formatted(hat.rarity.getFormatting())));
 
             Screen screen = MinecraftClient.getInstance().currentScreen;
+            assert screen != null;
             screen.renderTooltip(matrices, textList, tX + x, tY + y);
         }
 

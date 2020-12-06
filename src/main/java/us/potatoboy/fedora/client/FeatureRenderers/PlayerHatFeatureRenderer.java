@@ -54,9 +54,6 @@ public class PlayerHatFeatureRenderer extends FeatureRenderer<AbstractClientPlay
         matrices.translate(-0.5D, -0.5D, -0.5D);
 
         ItemStack itemStack = entity.getEquippedStack(EquipmentSlot.HEAD);
-        if (!itemStack.isEmpty()) {
-            //matrices.translate(0D, -0.05D, 0D);
-        }
 
         MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(currentHat.translucent ? RenderLayer.getTranslucentMovingBlock() : RenderLayer.getCutout()), null, bakedModel, 0.0F, 0.0F, 0.0F, light, 0);
         matrices.pop();
