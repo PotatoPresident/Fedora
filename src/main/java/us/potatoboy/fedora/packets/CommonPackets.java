@@ -30,7 +30,7 @@ public class CommonPackets {
                     }
                 } else {
                     if (hatId.equals("none")) {
-                        hatComponent.setCurrentHat(new Hat("none", null, null, false));
+                        hatComponent.setCurrentHat(Hat.NONE);
                     }
                 }
 

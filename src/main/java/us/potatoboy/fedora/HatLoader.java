@@ -77,9 +77,11 @@ public class HatLoader implements RRPPreGenEntrypoint {
 
             for (File file : modelFiles) {
                 String hatName = FilenameUtils.removeExtension(file.getName()).toLowerCase();
-                String creator = "Unknown";
+                String creator = "unknown";
                 Hat.Rarity rarity = Hat.Rarity.COMMON;
-                Boolean translucent = false;
+                boolean
+                        translucent = false,
+                        ignoreHelmet = false;
 
                 try {
                     JsonObject jsonObject = new JsonObject();
@@ -119,6 +121,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
 
                     try {
                         translucent = jsonObject.get("translucent").getAsBoolean();
+                        ignoreHelmet = jsonObject.get("ignoreHelmet").getAsBoolean();
                     } catch (Exception e) {
                         //Didn't include it, not translucent
                     }
@@ -127,11 +130,9 @@ public class HatLoader implements RRPPreGenEntrypoint {
                     LOGGER.severe("Something went wrong loading hat: " + file.getPath());
                 }
 
-                lang.forEach((id, jLang) -> {
-                    RESOURCE_PACK.addLang(new Identifier("fedora", id), jLang);
-                });
+                lang.forEach((id, jLang) -> RESOURCE_PACK.addLang(new Identifier("fedora", id), jLang));
 
-                HatManager.registerHat(hatName, creator, rarity, translucent);
+                HatManager.registerHat(hatName, creator, rarity, translucent, ignoreHelmet);
             }
         }
 

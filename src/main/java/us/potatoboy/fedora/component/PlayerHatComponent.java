@@ -26,7 +26,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
     public PlayerHatComponent (PlayerEntity playerEntity) {
         this.playerEntity = playerEntity;
         unlockedHats = new ArrayList<>();
-        unlockedHats.add(new Hat("none", null, null, false));
+        unlockedHats.add(Hat.NONE);
     }
 
     public Hat getCurrentHat() {
@@ -47,7 +47,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
                 hats = new ArrayList<>(HatManager.getHatRegistry());
             }
 
-            hats.add(0, new Hat("none", null, null, false));
+            hats.add(0, Hat.NONE);
             return hats;
         }
 
@@ -55,19 +55,19 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             if (playerEntity.isCreative()) {
                 hats = new ArrayList<>(FedoraClient.currentSession.getSessionHats());
-                hats.add(0, new Hat("none", null, null, false));
+                hats.add(0, Hat.NONE);
                 return hats;
             }
 
-            if (FedoraClient.currentSession.isOnServer()) {
+            if (!FedoraClient.currentSession.isOnServer()) {
                 hats = new ArrayList<>(HatManager.getHatRegistry());
-                hats.add(0, new Hat("none", null, null, false));
+                hats.add(0, Hat.NONE);
                 return hats;
             }
         } else {
             if (playerEntity.isCreative()) {
                 hats = new ArrayList<>(HatManager.getHatRegistry());
-                hats.add(0, new Hat("none", null, null, false));
+                hats.add(0, Hat.NONE);
                 return hats;
             }
         }
@@ -109,7 +109,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
         if (compoundTag.contains("unlockedHats")) {
             unlockedHats = new ArrayList<>();
-            unlockedHats.add(new Hat("none", null, null, false));
+            unlockedHats.add(Hat.NONE);
             ListTag listTag = compoundTag.getList("unlockedHats", 10);
             for(int i = 0; i < listTag.size(); ++i) {
                 String hatId = listTag.getCompound(i).getString("name");
