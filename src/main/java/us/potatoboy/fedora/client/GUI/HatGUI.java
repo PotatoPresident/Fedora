@@ -17,6 +17,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
+import us.potatoboy.fedora.HatManager;
 import us.potatoboy.fedora.client.FedoraClient;
 import us.potatoboy.fedora.packets.CommonPackets;
 
@@ -32,7 +33,8 @@ public class HatGUI extends LightweightGuiDescription {
 
     public HatGUI(ClientPlayerEntity playerEntity) {
         currentHat = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getCurrentHat();
-        unlockedHats = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getUnlockedHats();
+        unlockedHats = (ArrayList<Hat>) Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getUnlockedHats().clone();
+        unlockedHats.add(0, new Hat("none", null, null, false));
 
         int tempPages = (unlockedHats.size() + 6) / 7;
         if (tempPages == 0) tempPages = 1;
@@ -75,6 +77,9 @@ public class HatGUI extends LightweightGuiDescription {
             hatChoice.setOnClick(() -> {
                 int hatIndex = hatChoice.offset + (currentPage * 7);
                 currentHat = unlockedHats.get(hatIndex);
+                if (!currentHat.id.equals("none")) {
+                    currentHat = HatManager.getFromID(unlockedHats.get(hatIndex).id);
+                }
 
                 PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
                 passedData.writeString(currentHat.id);
@@ -90,7 +95,7 @@ public class HatGUI extends LightweightGuiDescription {
     }
 
     private class HatChoice extends WButton {
-        private int offset;
+        private final int offset;
         private Hat hat;
 
         public HatChoice(int offset) {

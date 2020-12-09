@@ -26,7 +26,6 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
     public PlayerHatComponent (PlayerEntity playerEntity) {
         this.playerEntity = playerEntity;
         unlockedHats = new ArrayList<>();
-        unlockedHats.add(new Hat("none", null, null, false));
     }
 
     public Hat getCurrentHat() {
@@ -47,7 +46,6 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
                 hats = new ArrayList<>(HatManager.getHatRegistry());
             }
 
-            hats.add(0, new Hat("none", null, null, false));
             return hats;
         }
 
@@ -55,19 +53,16 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             if (playerEntity.isCreative()) {
                 hats = new ArrayList<>(FedoraClient.currentSession.getSessionHats());
-                hats.add(0, new Hat("none", null, null, false));
                 return hats;
             }
 
             if (!FedoraClient.currentSession.isOnServer()) {
                 hats = new ArrayList<>(HatManager.getHatRegistry());
-                hats.add(0, new Hat("none", null, null, false));
                 return hats;
             }
         } else {
             if (playerEntity.isCreative()) {
                 hats = new ArrayList<>(HatManager.getHatRegistry());
-                hats.add(0, new Hat("none", null, null, false));
                 return hats;
             }
         }
@@ -89,6 +84,9 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
     public void removeHat(Hat hat) {
         unlockedHats.remove(hat);
+        if (currentHat == hat) {
+            currentHat = null;
+        }
         Fedora.PLAYER_HAT_COMPONENT.sync(playerEntity);
     }
 
@@ -109,7 +107,6 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
         if (compoundTag.contains("unlockedHats")) {
             unlockedHats = new ArrayList<>();
-            unlockedHats.add(new Hat("none", null, null, false));
             ListTag listTag = compoundTag.getList("unlockedHats", 10);
             for(int i = 0; i < listTag.size(); ++i) {
                 String hatId = listTag.getCompound(i).getString("name");
@@ -118,6 +115,8 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
                     unlockedHats.add(hat);
                 }
             }
+        } else {
+            unlockedHats = new ArrayList<>();
         }
     }
 
