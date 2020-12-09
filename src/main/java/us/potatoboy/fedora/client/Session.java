@@ -21,24 +21,16 @@ public class Session {
     }
 
     public HashSet<Hat> getSessionHats() {
-        if (serverHats == null) {
-            return HatManager.getHatRegistry();
-        }
+        if (serverHats == null) return HatManager.getHatRegistry();
 
         HashSet<Hat> sessionHats = new HashSet<>();
 
-        for (Hat hat : HatManager.getHatRegistry()) {
-            if (serverHats.contains(hat.id)) {
-                sessionHats.add(hat);
-            }
-        }
+        for (Hat hat : HatManager.getHatRegistry()) if (serverHats.contains(hat.id)) sessionHats.add(hat);
         return sessionHats;
     }
 
     public boolean isOnServer() {
-        if (MinecraftClient.getInstance().isIntegratedServerRunning()) {
-            return true;
-        }
+        if (MinecraftClient.getInstance().isIntegratedServerRunning()) return true;
         return serverHats != null;
     }
 }

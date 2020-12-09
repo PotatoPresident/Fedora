@@ -1,5 +1,6 @@
 package us.potatoboy.fedora.client;
 
+import com.google.common.collect.Maps;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -26,7 +27,7 @@ import java.util.HashMap;
 
 @Environment(EnvType.CLIENT)
 public class FedoraClient implements ClientModInitializer {
-    private static HashMap<Class, HatHelper> HAT_HELPERS = new HashMap<>();
+    private static HashMap<Class<? extends LivingEntity>, HatHelper> HAT_HELPERS = Maps.newHashMap();
     public static Session currentSession;
 
     @Override
@@ -41,17 +42,13 @@ public class FedoraClient implements ClientModInitializer {
         ));
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(((entityType, livingEntityRenderer, registrationHelper) -> {
-            if (livingEntityRenderer instanceof PlayerEntityRenderer) {
-                registrationHelper.register(new PlayerHatFeatureRenderer((PlayerEntityRenderer) livingEntityRenderer));
-            }
+            if (livingEntityRenderer instanceof PlayerEntityRenderer)
+                registrationHelper.register(new PlayerHatFeatureRenderer<>((PlayerEntityRenderer) livingEntityRenderer));
             registrationHelper.register(new HatRenderer<>(livingEntityRenderer));
         }));
 
-        ModelLoadingRegistry.INSTANCE.registerAppender((manager, out) -> {
-            HatManager.getHatRegistry().forEach((hat -> {
-                out.accept(hat.getModelId());
-            }));
-        });
+        ModelLoadingRegistry.INSTANCE.registerAppender((manager, out) ->
+                HatManager.getHatRegistry().forEach((hat -> out.accept(hat.getModelId()))));
 
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             while (hatKey.wasPressed()) {
@@ -65,70 +62,62 @@ public class FedoraClient implements ClientModInitializer {
         registerVanillaHelpers();
     }
 
-    public static void registerHelper(Class entityClass, HatHelper hatHelper) {
-        if (LivingEntity.class.isAssignableFrom(entityClass)) {
-            HAT_HELPERS.put(entityClass, hatHelper);
-        }
+    public static <T extends LivingEntity> HatHelper registerHelper(Class<T> clazz, double height, double forward, double side, float scale) {
+        return registerHelper(clazz, new HatHelper(height, forward, side, scale));
     }
 
-    public static HatHelper getHelper(Class entityClass) {
-        if (LivingEntity.class.isAssignableFrom(entityClass)) {
-            if (HAT_HELPERS.get(entityClass) != null) return HAT_HELPERS.get(entityClass);
-        }
+    public static <T extends LivingEntity> HatHelper registerHelper(Class<T> clazz, HatHelper hatHelper) {
+        return HAT_HELPERS.put(clazz, hatHelper);
+    }
 
-        for (Class registeredClass : HAT_HELPERS.keySet()) {
-            if (registeredClass.isAssignableFrom(entityClass)) {
-                return HAT_HELPERS.get(registeredClass);
-            }
-        }
-
-        return null;
+    public static <T extends LivingEntity> HatHelper getHelper(Class<T> clazz) {
+        return HAT_HELPERS.getOrDefault(clazz, registerHelper(clazz, -0.4, 0, 0, 0F));
     }
 
     private void registerVanillaHelpers() {
-        registerHelper(BeeEntity.class, new HatHelper(-0.4, 0, 0, 0.8F));
-        registerHelper(BlazeEntity.class, new HatHelper(-0.4, 0, 0, 1F));
-        registerHelper(CatEntity.class, new HatHelper(-0.8, 0.1, 0, 0.6F));
-        registerHelper(SpiderEntity.class, new HatHelper(-0.3, 0.3, 0, 1F));
-        registerHelper(ChickenEntity.class, new HatHelper(0, 0, 0, 0.5F));
-        registerHelper(CodEntity.class, new HatHelper(-0.6, 0, 0, 1F));
-        registerHelper(CowEntity.class, new HatHelper(-0.4, 0.2, 0, 1F));
-        registerHelper(DolphinEntity.class, new HatHelper(-0.1, 0, 0, 1F));
-        registerHelper(LlamaEntity.class, new HatHelper(0.8, 0.3, 0, 1F));
-        registerHelper(HorseBaseEntity.class, new HatHelper(0.3, 0, 0, 1F));
-        registerHelper(GuardianEntity.class, new HatHelper(-1.6, 0, 0, 1F));
-        registerHelper(EndermiteEntity.class, new HatHelper(-2.5, 0, 0, 0.2F));
-        registerHelper(IllagerEntity.class, new HatHelper(0.2, 0, 0, 1F));
-        registerHelper(MerchantEntity.class, new HatHelper(0.2, 0, 0, 1F));
-        registerHelper(VillagerEntity.class, new HatHelper(0.2, 0, 0, 1F));
-        registerHelper(ZombieVillagerEntity.class, new HatHelper(0.0625, 0, 0, 1F));
-        registerHelper(FoxEntity.class, new HatHelper(-0.6, 0.1, -0.1, 1F));
-        registerHelper(GhastEntity.class, new HatHelper(-0.2, 0, 0, 2F));
-        registerHelper(HoglinEntity.class, new HatHelper(-0.5, 0.4, 0, 1F));
-        registerHelper(MagmaCubeEntity.class, new HatHelper(-2.4, 0, 0, 1F));
-        registerHelper(OcelotEntity.class, new HatHelper(-0.8, 0.1, 0, 0.6F));
-        registerHelper(PandaEntity.class, new HatHelper(-0.3, 0, 0, 1F));
+        registerHelper(BeeEntity.class, -0.4, 0, 0, 0.8F);
+        registerHelper(BlazeEntity.class, -0.4, 0, 0, 1F);
+        registerHelper(CatEntity.class, -0.8, 0.1, 0, 0.6F);
+        registerHelper(SpiderEntity.class, -0.3, 0.3, 0, 1F);
+        registerHelper(ChickenEntity.class, 0, 0, 0, 0.5F);
+        registerHelper(CodEntity.class, -0.6, 0, 0, 1F);
+        registerHelper(CowEntity.class, -0.4, 0.2, 0, 1F);
+        registerHelper(DolphinEntity.class, -0.1, 0, 0, 1F);
+        registerHelper(LlamaEntity.class, 0.8, 0.3, 0, 1F);
+        registerHelper(HorseBaseEntity.class, 0.3, 0, 0, 1F);
+        registerHelper(GuardianEntity.class, -1.6, 0, 0, 1F);
+        registerHelper(EndermiteEntity.class, -2.5, 0, 0, 0.2F);
+        registerHelper(IllagerEntity.class, 0.2, 0, 0, 1F);
+        registerHelper(MerchantEntity.class, 0.2, 0, 0, 1F);
+        registerHelper(VillagerEntity.class, 0.2, 0, 0, 1F);
+        registerHelper(ZombieVillagerEntity.class, 0.0625, 0, 0, 1F);
+        registerHelper(FoxEntity.class, -0.6, 0.1, -0.1, 1F);
+        registerHelper(GhastEntity.class, -0.2, 0, 0, 2F);
+        registerHelper(HoglinEntity.class, -0.5, 0.4, 0, 1F);
+        registerHelper(MagmaCubeEntity.class, -2.4, 0, 0, 1F);
+        registerHelper(OcelotEntity.class, -0.8, 0.1, 0, 0.6F);
+        registerHelper(PandaEntity.class, -0.3, 0, 0, 1F);
         registerHelper(ParrotEntity.class, new HatHelper(-0.9, 0.4, 0, 0.3F, 4));
-        registerHelper(PhantomEntity.class, new HatHelper(-0.6, 0.2, 0, 1F));
-        registerHelper(PigEntity.class, new HatHelper(-0.4, 0.4, 0, 1F));
-        registerHelper(PolarBearEntity.class, new HatHelper(-0.5, 0, 0, 1F));
-        registerHelper(PufferfishEntity.class, new HatHelper(-1.4, 0, 0, 0.2F));
-        registerHelper(RabbitEntity.class, new HatHelper(-1.4, 0.2, 0, 0.5F));
-        registerHelper(RavagerEntity.class, new HatHelper(0.7, 0, 0, 2F));
-        registerHelper(SalmonEntity.class, new HatHelper(-0.6, 0, 0, 1F));
-        registerHelper(SheepEntity.class, new HatHelper(-0.4, 0.1, 0, 1F));
-        registerHelper(SilverfishEntity.class, new HatHelper(-2.5, 0, 0, 0.2F));
-        registerHelper(SlimeEntity.class, new HatHelper(-2.4, 0, 0, 1F));
-        registerHelper(StriderEntity.class, new HatHelper(-0.1, 0, 0, 1F));
-        registerHelper(TropicalFishEntity.class, new HatHelper(-0.8, 0, 0, 0.5F));
-        registerHelper(TurtleEntity.class, new HatHelper(-0.9, 0, 0, 0.5F));
-        registerHelper(WolfEntity.class, new HatHelper(-0.5, 0, -0.1, 0.7F));
-        registerHelper(ZoglinEntity.class, new HatHelper(-0.5, 0.4, 0, 1F));
-        registerHelper(WolfEntity.class, new HatHelper(-0.6, 0, -0.1, 0.7F));
-        registerHelper(BatEntity.class, new HatHelper(-0.5, 0, 0, 1F));
-        registerHelper(IronGolemEntity.class, new HatHelper(0.4, 0.2, 0, 1F));
-        registerHelper(TraderLlamaEntity.class, new HatHelper(0.5, 0.2, 0, 1F));
-        registerHelper(WitherEntity.class, new HatHelper(-0.4, 0, 0, 1F));
+        registerHelper(PhantomEntity.class, -0.6, 0.2, 0, 1F);
+        registerHelper(PigEntity.class, -0.4, 0.4, 0, 1F);
+        registerHelper(PolarBearEntity.class, -0.5, 0, 0, 1F);
+        registerHelper(PufferfishEntity.class, -1.4, 0, 0, 0.2F);
+        registerHelper(RabbitEntity.class, -1.4, 0.2, 0, 0.5F);
+        registerHelper(RavagerEntity.class, 0.7, 0, 0, 2F);
+        registerHelper(SalmonEntity.class, -0.6, 0, 0, 1F);
+        registerHelper(SheepEntity.class, -0.4, 0.1, 0, 1F);
+        registerHelper(SilverfishEntity.class, -2.5, 0, 0, 0.2F);
+        registerHelper(SlimeEntity.class, -2.4, 0, 0, 1F);
+        registerHelper(StriderEntity.class, -0.1, 0, 0, 1F);
+        registerHelper(TropicalFishEntity.class, -0.8, 0, 0, 0.5F);
+        registerHelper(TurtleEntity.class, -0.9, 0, 0, 0.5F);
+        registerHelper(WolfEntity.class, -0.5, 0, -0.1, 0.7F);
+        registerHelper(ZoglinEntity.class, -0.5, 0.4, 0, 1F);
+        registerHelper(WolfEntity.class, -0.6, 0, -0.1, 0.7F);
+        registerHelper(BatEntity.class, -0.5, 0, 0, 1F);
+        registerHelper(IronGolemEntity.class, 0.4, 0.2, 0, 1F);
+        registerHelper(TraderLlamaEntity.class, 0.5, 0.2, 0, 1F);
+        registerHelper(WitherEntity.class, -0.4, 0, 0, 1F);
         registerHelper(SnowGolemEntity.class, new HatHelper(-0.1, 0 , 0, 1F, 2));
     }
 }

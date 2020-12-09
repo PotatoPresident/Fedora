@@ -59,7 +59,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
                 return hats;
             }
 
-            if (!FedoraClient.currentSession.isOnServer()) {
+            if (FedoraClient.currentSession.isOnServer()) {
                 hats = new ArrayList<>(HatManager.getHatRegistry());
                 hats.add(0, new Hat("none", null, null, false));
                 return hats;
