@@ -2,6 +2,7 @@ package us.potatoboy.fedora.mixin;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +18,7 @@ public abstract class LivingEntityMixin {
     private void onKilledBy(@Nullable LivingEntity adversary, CallbackInfo ci) {
         LivingEntity livingEntity = (LivingEntity) (Object)this;
         if (!livingEntity.world.isClient) {
-            if (adversary instanceof PlayerEntity) {
+            if (adversary instanceof ServerPlayerEntity) {
                 if (Fedora.config.isBlacklisted(Registry.ENTITY_TYPE.getId(livingEntity.getType()))) return;
                 if (livingEntity.isBaby()) return;
 
