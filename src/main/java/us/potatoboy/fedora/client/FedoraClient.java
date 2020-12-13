@@ -97,7 +97,7 @@ public class FedoraClient implements ClientModInitializer {
         registerHelper(MagmaCubeEntity.class, -2.4, 0, 0, 1F);
         registerHelper(OcelotEntity.class, -0.8, 0.1, 0, 0.6F);
         registerHelper(PandaEntity.class, -0.3, 0, 0, 1F);
-        registerHelper(ParrotEntity.class, new HatHelper(-0.9, 0.4, 0, 0.3F, 4));
+        registerHelper(ParrotEntity.class, -0.9, 0.4, 0, 0.3F, 4);
         registerHelper(PhantomEntity.class, -0.6, 0.2, 0, 1F);
         registerHelper(PigEntity.class, -0.4, 0.4, 0, 1F);
         registerHelper(PolarBearEntity.class, -0.5, 0, 0, 1F);
@@ -118,6 +118,6 @@ public class FedoraClient implements ClientModInitializer {
         registerHelper(IronGolemEntity.class, 0.4, 0.2, 0, 1F);
         registerHelper(TraderLlamaEntity.class, 0.5, 0.2, 0, 1F);
         registerHelper(WitherEntity.class, -0.4, 0, 0, 1F);
-        registerHelper(SnowGolemEntity.class, new HatHelper(-0.1, 0 , 0, 1F, 2));
+        registerHelper(SnowGolemEntity.class, -0.1, 0 , 0, 1F, 2);
     }
 }
