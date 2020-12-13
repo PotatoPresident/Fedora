@@ -49,13 +49,6 @@ public class PlayerHatFeatureRenderer<T extends AbstractClientPlayerEntity> exte
             double y = !hat.ignoreHelmets && entity.hasStackEquipped(EquipmentSlot.HEAD) ? -0.44D : -0.5D;
             matrices.translate(-0.5D, y, -0.5D);
 
-            /*
-            ItemStack itemStack = entity.getEquippedStack(EquipmentSlot.HEAD);
-
-            if (!itemStack.isEmpty()) {
-                matrices.translate(0D, -0.05D, 0D);
-            }*/
-
             RenderHelper.renderHat(hat, matrices, consumers, bakedModel, light);
 
             matrices.pop();

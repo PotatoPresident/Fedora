@@ -34,7 +34,7 @@ public class HatGUI extends LightweightGuiDescription {
     public HatGUI(ClientPlayerEntity playerEntity) {
         currentHat = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getCurrentHat();
         unlockedHats = (ArrayList<Hat>) Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getUnlockedHats().clone();
-        unlockedHats.add(0, new Hat("none", null, null, false));
+        unlockedHats.add(0, Hat.NONE);
 
         int tempPages = (unlockedHats.size() + 6) / 7;
         if (tempPages == 0) tempPages = 1;
