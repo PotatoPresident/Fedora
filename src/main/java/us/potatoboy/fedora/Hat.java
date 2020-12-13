@@ -6,16 +6,22 @@ import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.util.Formatting;
 
 public class Hat {
+    public static final Hat NONE = new Hat("none", null, null, false, false);
+
     public final String id;
     public final String creator;
     public final Rarity rarity;
-    public final Boolean translucent;
+    public final boolean
+            translucent,
+            ignoreHelmets;
 
-    public Hat(String id, String creator, Rarity rarity, Boolean translucent) {
+
+    public Hat(String id, String creator, Rarity rarity, boolean translucent, boolean ignoreHelmets) {
         this.id = id;
         this.creator = creator;
         this.rarity = rarity;
         this.translucent = translucent;
+        this.ignoreHelmets = ignoreHelmets;
     }
 
     @Environment(EnvType.CLIENT)

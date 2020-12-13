@@ -53,16 +53,19 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             if (playerEntity.isCreative()) {
                 hats = new ArrayList<>(FedoraClient.currentSession.getSessionHats());
+              
                 return hats;
             }
 
             if (!FedoraClient.currentSession.isOnServer()) {
                 hats = new ArrayList<>(HatManager.getHatRegistry());
+
                 return hats;
             }
         } else {
             if (playerEntity.isCreative()) {
                 hats = new ArrayList<>(HatManager.getHatRegistry());
+
                 return hats;
             }
         }
@@ -107,6 +110,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
         if (compoundTag.contains("unlockedHats")) {
             unlockedHats = new ArrayList<>();
+
             ListTag listTag = compoundTag.getList("unlockedHats", 10);
             for(int i = 0; i < listTag.size(); ++i) {
                 String hatId = listTag.getCompound(i).getString("name");
