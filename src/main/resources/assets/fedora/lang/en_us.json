@@ -14,5 +14,7 @@
   "toast.fedora.serverHats.desc": "Successfully downloaded",
   "fedora.hat.none": "None",
   "server.hatPrompt.title": "Download hats from server?",
-  "server.hatPrompt.desc": "The server your joining has hats that aren't installed on your client. Would you like to download them to your hats folder? If you don't, you won't be able to see them."
+  "server.hatPrompt.desc": "The server your joining has hats that aren't installed on your client. Would you like to download them to your hats folder? If you don't, you won't be able to see them.",
+  "text.fedora.invalid_hat": "Invalid Hat",
+  "text.fedora.set_hat": "Set %s hats"
 }

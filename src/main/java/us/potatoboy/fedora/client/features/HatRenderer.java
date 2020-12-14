@@ -2,7 +2,6 @@ package us.potatoboy.fedora.client.features;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
@@ -13,6 +12,7 @@ import net.minecraft.client.render.model.json.Transformation;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -21,6 +21,7 @@ import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.client.FedoraClient;
 import us.potatoboy.fedora.client.HatHelper;
+import us.potatoboy.fedora.client.RenderHelper;
 
 import java.lang.reflect.Field;
 
@@ -127,9 +128,11 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
         Transformation transformation = bakedModel.getTransformation().getTransformation(ModelTransformation.Mode.HEAD);
         transformation.apply(false, matrices);
 
-        matrices.translate(-0.5D, -0.5D, -0.5D);
+        double y = !hat.ignoreHelmets && entity.hasStackEquipped(EquipmentSlot.HEAD) ? -0.44D : -0.5D;
+        matrices.translate(-0.5D, y, -0.5D);
 
-        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(hat.translucent ? RenderLayer.getTranslucentMovingBlock() : RenderLayer.getCutout()), null, bakedModel, 0.0F, 0.0F, 0.0F, light, 0);
+        RenderHelper.renderHat(hat, matrices, vertexConsumers, bakedModel, light);
+
         matrices.pop();
     }
 }
