@@ -5,6 +5,7 @@ import dev.onyxstudios.cca.api.v3.component.ComponentRegistryV3;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import nerdhub.cardinal.components.api.util.RespawnCopyStrategy;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.entity.LivingEntity;
@@ -29,10 +30,14 @@ public class Fedora implements ModInitializer, EntityComponentInitializer {
 
     @Override
     public void onInitialize() {
+        AutoConfig.register(FedoraConfig.class, GsonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(FedoraConfig.class).getConfig();
 
         HatCommand.init();
         CommonPackets.init();
+
+        HatLoader hatLoader = new HatLoader();
+        hatLoader.loadHats();
     }
 
     @Override
