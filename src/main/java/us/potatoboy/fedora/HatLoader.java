@@ -56,7 +56,7 @@ public class HatLoader implements RRPPreGenEntrypoint {
             config.hatVer = serverVer;
             AutoConfig.getConfigHolder(FedoraConfig.class).save();
         } else if (config.autoDownload) {
-            if (config.hatVer < serverVer) {
+            if (config.hatVer < serverVer && isServerCompat()) {
                 LOGGER.info("New hats available on server. Downloading");
                 downloadHatsFromServer();
                 config.hatVer = serverVer;
@@ -121,9 +121,14 @@ public class HatLoader implements RRPPreGenEntrypoint {
 
                     try {
                         translucent = jsonObject.get("translucent").getAsBoolean();
-                        ignoreHelmet = jsonObject.get("ignoreHelmet").getAsBoolean();
                     } catch (Exception e) {
                         //Didn't include it, not translucent
+                    }
+
+                    try {
+                        ignoreHelmet = jsonObject.get("ignoreHelmet").getAsBoolean();
+                    } catch (Exception e) {
+                        //Don't ignore helmet
                     }
 
                 } catch (IllegalStateException e) {
@@ -202,6 +207,16 @@ public class HatLoader implements RRPPreGenEntrypoint {
         } catch (Exception e) {
             LOGGER.info("Failed to check for updates on server");
             return 0;
+        }
+    }
+
+    private boolean isServerCompat() {
+        try {
+            JsonObject jsonObject = readJsonUrl("https://raw.githubusercontent.com/PotatoPresident/Fedora/master/hats/hats.json");
+            return Fedora.major_ver == jsonObject.get("major_version").getAsInt();
+        } catch (Exception e) {
+            LOGGER.info("Failed to check server major version");
+            return false;
         }
     }
 }

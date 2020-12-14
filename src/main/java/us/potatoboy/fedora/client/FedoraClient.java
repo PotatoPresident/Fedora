@@ -17,10 +17,10 @@ import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
 import org.lwjgl.glfw.GLFW;
 import us.potatoboy.fedora.HatManager;
-import us.potatoboy.fedora.client.FeatureRenderers.HatRenderer;
-import us.potatoboy.fedora.client.FeatureRenderers.PlayerHatFeatureRenderer;
-import us.potatoboy.fedora.client.GUI.HatGUI;
-import us.potatoboy.fedora.client.GUI.HatScreen;
+import us.potatoboy.fedora.client.features.HatRenderer;
+import us.potatoboy.fedora.client.features.PlayerHatFeatureRenderer;
+import us.potatoboy.fedora.client.gui.HatGUI;
+import us.potatoboy.fedora.client.gui.HatScreen;
 import us.potatoboy.fedora.packets.ClientPackets;
 
 import java.util.HashMap;
@@ -71,7 +71,18 @@ public class FedoraClient implements ClientModInitializer {
     }
 
     public static <T extends LivingEntity> HatHelper getHelper(Class<T> clazz) {
-        return HAT_HELPERS.getOrDefault(clazz, registerHelper(clazz, -0.4, 0, 0, 0F));
+        HatHelper helper;
+
+        helper = HAT_HELPERS.get(clazz);
+        if (helper == null) {
+            for (Class registeredClass : HAT_HELPERS.keySet()) {
+                if (registeredClass.isAssignableFrom(clazz)) {
+                    return helper = HAT_HELPERS.get(registeredClass);
+                }
+            }
+        }
+
+        return helper;
     }
 
     private void registerVanillaHelpers() {

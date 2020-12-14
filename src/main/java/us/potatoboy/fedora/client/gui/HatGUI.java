@@ -1,4 +1,4 @@
-package us.potatoboy.fedora.client.GUI;
+package us.potatoboy.fedora.client.gui;
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
@@ -29,6 +29,9 @@ public class HatGUI extends LightweightGuiDescription {
     private final int pages;
     private ArrayList<Hat> unlockedHats;
 
+    WButton backwards;
+    WButton forwards;
+
     private final Identifier INFO = new Identifier(Fedora.MOD_ID, "textures/gui/info_icon.png");
 
     public HatGUI(ClientPlayerEntity playerEntity) {
@@ -50,22 +53,20 @@ public class HatGUI extends LightweightGuiDescription {
         WDynamicLabel pageNumber = new WDynamicLabel(() -> (currentPage + 1) + "/" + pages);
         root.add(pageNumber, 135, 5, 30, 30);
 
-        WButton backwards = new WButton();
+        backwards = new WButton();
         backwards.setLabel(new LiteralText("<"));
         backwards.setOnClick(() -> {
-            if (currentPage > 0) {
-                --currentPage;
-            }
+            changePage(false);
         });
+        backwards.setEnabled(currentPage > 0);
         root.add(backwards, 85, 0, 20, 20);
 
-        WButton forwards = new WButton();
+        forwards = new WButton();
         forwards.setLabel(new LiteralText(">"));
         forwards.setOnClick(() -> {
-            if (currentPage + 1 != pages) {
-                ++currentPage;
-            }
+            changePage(true);
         });
+        forwards.setEnabled(currentPage + 1 != pages);
         root.add(forwards, 185, 0, 20, 20);
 
         for (int i = 0; i < 7; i++) {
@@ -92,6 +93,17 @@ public class HatGUI extends LightweightGuiDescription {
 
             root.add(hatChoice, 85, 25 + (i * 25));
         }
+    }
+
+    private void changePage(boolean forward) {
+        if (forward) {
+            ++currentPage;
+        } else {
+            --currentPage;
+        }
+
+        forwards.setEnabled(currentPage + 1 != pages);
+        backwards.setEnabled(currentPage > 0);
     }
 
     private class HatChoice extends WButton {

@@ -1,4 +1,4 @@
-package us.potatoboy.fedora.client.FeatureRenderers;
+package us.potatoboy.fedora.client.features;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
@@ -26,6 +26,7 @@ import java.lang.reflect.Field;
 
 public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
     private Field headField;
+    private HatHelper helper;
 
     public HatRenderer(FeatureRendererContext<T, M> context) {
         super(context);
@@ -42,7 +43,9 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
 
         ModelIdentifier modelIdentifier = Fedora.ENTITY_HAT_COMPONENT.get(entity).getCurrentHat().getModelId();
         BakedModel bakedModel = MinecraftClient.getInstance().getBakedModelManager().getModel(modelIdentifier);
-        HatHelper helper = FedoraClient.getHelper(entity.getClass());
+        if (helper == null) {
+            helper = FedoraClient.getHelper(entity.getClass());
+        }
 
         matrices.push();
 

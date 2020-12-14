@@ -1,4 +1,4 @@
-package us.potatoboy.fedora.client.GUI;
+package us.potatoboy.fedora.client.gui;
 
 import io.github.cottonmc.cotton.gui.widget.icon.Icon;
 import net.minecraft.client.MinecraftClient;

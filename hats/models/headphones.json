@@ -4,6 +4,7 @@
 		"en_us": "Headphones"
 	},
 	"rarity": "RARE",
+	"ignoreHelmet": true,
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "fedora:block/headphone",

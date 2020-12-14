@@ -1,4 +1,4 @@
-package us.potatoboy.fedora.client.GUI;
+package us.potatoboy.fedora.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.toast.Toast;

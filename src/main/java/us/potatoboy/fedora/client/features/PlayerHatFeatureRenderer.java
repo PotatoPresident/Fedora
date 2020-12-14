@@ -1,4 +1,4 @@
-package us.potatoboy.fedora.client.FeatureRenderers;
+package us.potatoboy.fedora.client.features;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
