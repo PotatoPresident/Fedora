@@ -4,6 +4,7 @@
 		"en_us": "Astronaut"
 	},
 	"rarity": "UNCOMMON",
+	"ignoreHelmet": true,
 	"textures": {
 		"0": "block/glass",
 		"1": "fedora:block/antenna",
