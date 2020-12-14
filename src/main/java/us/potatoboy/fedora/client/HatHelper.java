@@ -1,38 +1,32 @@
 package us.potatoboy.fedora.client;
 
 public class HatHelper {
-    private final double heightOffset;
-    private final double forwardOffset;
-    private final double sideOffset;
+    private final double[] offsets = new double[3];
     private final float scale;
     private final int headIndex;
 
-    public HatHelper(double heightOffset, double forwardOffset, double sideOffset, float scale) {
-        this.heightOffset = heightOffset;
-        this.forwardOffset = forwardOffset;
-        this.sideOffset = sideOffset;
-        this.scale = scale;
-        headIndex = 0;
+    public HatHelper(double height, double forward, double side, float scale) {
+        this(height, forward, side, scale, 0);
     }
 
-    public HatHelper(double heightOffset, double forwardOffset, double sideOffset, float scale, int headIndex) {
-        this.heightOffset = heightOffset;
-        this.forwardOffset = forwardOffset;
-        this.sideOffset = sideOffset;
+    public HatHelper(double height, double forward, double side, float scale, int headIndex) {
+        offsets[0] = height;
+        offsets[1] = forward;
+        offsets[2] = side;
         this.scale = scale;
         this.headIndex = headIndex;
     }
 
     public double getHeightOffset() {
-        return heightOffset;
+        return offsets[0];
     }
 
     public double getForwardOffset() {
-        return forwardOffset;
+        return offsets[1];
     }
 
     public double getSideOffset() {
-        return sideOffset;
+        return offsets[2];
     }
 
     public float getScale() {

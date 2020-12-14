@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "major_version": 1,
   "models": [
     "fedora",
     "tiny_potato",

@@ -28,5 +28,9 @@ If applicable, add screenshots to help explain your problem.
  - Minecraft Version[e.g. 1.16.2]
  - Version [e.g. 1.0.0]
 
+
+**Log**
+Include your latest.log here
+
 **Additional context**
 Add any other context about the problem here.

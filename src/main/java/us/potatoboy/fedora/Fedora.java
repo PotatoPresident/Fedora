@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 
 public class Fedora implements ModInitializer, EntityComponentInitializer {
     public static final String MOD_ID = "fedora";
+    public static final int major_ver = 1;
 
     public static final ComponentKey<PlayerHatComponent> PLAYER_HAT_COMPONENT = ComponentRegistryV3.INSTANCE.getOrCreate(new Identifier(MOD_ID, "player_hat"), PlayerHatComponent.class);
     public static final ComponentKey<EntityHatComponent> ENTITY_HAT_COMPONENT = ComponentRegistryV3.INSTANCE.getOrCreate(new Identifier(MOD_ID, "entity_hat"), EntityHatComponent.class);

@@ -19,8 +19,8 @@ import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatLoader;
 import us.potatoboy.fedora.HatManager;
 import us.potatoboy.fedora.client.FedoraClient;
-import us.potatoboy.fedora.client.GUI.HatToast;
 import us.potatoboy.fedora.client.Session;
+import us.potatoboy.fedora.client.gui.HatToast;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

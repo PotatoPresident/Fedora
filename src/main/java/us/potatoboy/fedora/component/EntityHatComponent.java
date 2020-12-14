@@ -48,4 +48,11 @@ public class EntityHatComponent implements ComponentV3, AutoSyncedComponent {
             tag.putString("currentHat", "");
         }
     }
+
+    public boolean setHat(Hat hat) {
+        boolean updated = currentHat != hat;
+        currentHat = hat;
+
+        return updated;
+    }
 }
