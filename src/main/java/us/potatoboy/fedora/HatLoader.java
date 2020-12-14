@@ -2,9 +2,7 @@ package us.potatoboy.fedora;
 
 import com.google.gson.*;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
-import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.devtech.arrp.api.RRPCallback;
-import net.devtech.arrp.api.RRPPreGenEntrypoint;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.blockstate.JState;
 import net.devtech.arrp.json.lang.JLang;
@@ -21,7 +19,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-public class HatLoader implements RRPPreGenEntrypoint {
+public class HatLoader {
     private static final Logger LOGGER = Logger.getLogger("fedora");
     private static final FileFilter POSSIBLE_HAT = (file) -> {
         boolean isJson = file.isFile() && file.getName().endsWith(".json");
@@ -39,9 +37,8 @@ public class HatLoader implements RRPPreGenEntrypoint {
     public static File[] modelFiles;
     public static File[] textureFiles;
 
-    @Override
-    public void pregen() {
-        AutoConfig.register(FedoraConfig.class, GsonConfigSerializer::new);
+
+    public void loadHats() {
         FedoraConfig config = AutoConfig.getConfigHolder(FedoraConfig.class).getConfig();
         int serverVer = getServerHatVersion();
 
