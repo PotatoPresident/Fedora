@@ -1,0 +1,47 @@
+{
+	"credit": "Pois1x",
+	"lang": {
+		"en_us": "Straw Hat"
+	},
+	"rarity": "COMMON",
+	"textures": {
+		"0": "fedora:block/strawhatstraw",
+		"1": "fedora:block/strawhatmain",
+		"particle": "fedora:block/strawhatstraw"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 4],
+			"to": [12, 3, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12, 8, 12]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 3], "texture": "#1"},
+				"east": {"uv": [0, 12, 8, 15], "texture": "#1"},
+				"south": {"uv": [0, 8, 8, 11], "texture": "#1"},
+				"west": {"uv": [0, 4, 8, 7], "texture": "#1"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#1"},
+				"down": {"uv": [8, 8, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [1, 0, 1],
+			"to": [15, 0, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12, 8, 9]},
+			"faces": {
+				"north": {"uv": [0, 0, 3.5, 0], "texture": "#missing"},
+				"east": {"uv": [0, 0, 3.5, 0], "texture": "#missing"},
+				"south": {"uv": [0, 0, 3.5, 0], "texture": "#missing"},
+				"west": {"uv": [0, 0, 3.5, 0], "texture": "#missing"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#0"},
+				"down": {"uv": [1, 15, 15, 1], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"rotation": [9, 0, 0],
+			"translation": [0, 17, 2],
+			"scale": [1.9, 1.9, 1.9]
+		}
+	}
+}

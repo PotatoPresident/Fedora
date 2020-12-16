@@ -1,0 +1,67 @@
+{
+	"credit": "Pois1x",
+	"lang": {
+		"en_us": "Ender Chest"
+	},
+	"rarity": "RARE",
+	"textures": {
+		"0": "entity/chest/ender",
+		"particle": "entity/chest/ender"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 10, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 8, 9]},
+			"faces": {
+				"north": {"uv": [10.5, 10.75, 14, 8.25], "texture": "#0"},
+				"east": {"uv": [7, 10.75, 10.5, 8.25], "texture": "#0"},
+				"south": {"uv": [3.5, 10.75, 7, 8.25], "texture": "#0"},
+				"west": {"uv": [0, 10.75, 3.5, 8.25], "texture": "#0"},
+				"up": {"uv": [7, 4.75, 10.5, 8.25], "texture": "#0"},
+				"down": {"uv": [3.5, 4.75, 7, 8.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Lock",
+			"from": [7, 8, 0],
+			"to": [9, 12, 1],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 10, 15]},
+			"faces": {
+				"north": {"uv": [0.5, 1.25, 1, 0.25], "texture": "#0"},
+				"east": {"uv": [0.5, 1.25, 0.75, 0.25], "texture": "#0"},
+				"south": {"uv": [3.5, 4.75, 7, 3.5], "texture": "#0"},
+				"west": {"uv": [0.75, 1.25, 1, 0.25], "texture": "#0"},
+				"up": {"uv": [0.5, 0, 1, 0.25], "texture": "#0"},
+				"down": {"uv": [0.5, 0, 1, 0.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Lid",
+			"from": [1, 10, 1],
+			"to": [15, 15, 15],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 10, 15]},
+			"faces": {
+				"north": {"uv": [10.5, 4.75, 14, 3.5], "texture": "#0"},
+				"east": {"uv": [7, 4.75, 10.5, 3.5], "texture": "#0"},
+				"south": {"uv": [3.5, 4.75, 7, 3.5], "texture": "#0"},
+				"west": {"uv": [0, 4.75, 3.5, 3.5], "texture": "#0"},
+				"up": {"uv": [7, 0, 10.5, 3.5], "texture": "#0"},
+				"down": {"uv": [3.5, 0, 7, 3.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [0, 11, 0],
+			"scale": [0.6, 0.6, 0.6]
+		}
+	},
+	"groups": [0,
+		{
+			"name": "Lid",
+			"origin": [8, 8, 8],
+			"children": [1, 2]
+		}
+	]
+}
