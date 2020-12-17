@@ -5,7 +5,7 @@ import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WDynamicLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -84,7 +84,7 @@ public class HatGUI extends LightweightGuiDescription {
 
                 PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
                 passedData.writeString(currentHat.id);
-                ClientSidePacketRegistry.INSTANCE.sendToServer(CommonPackets.SET_HAT, passedData);
+                ClientPlayNetworking.send(CommonPackets.SET_HAT, passedData);
 
                 if (!FedoraClient.currentSession.isOnServer()) {
                     Fedora.PLAYER_HAT_COMPONENT.get(MinecraftClient.getInstance().player).setCurrentHat(currentHat);

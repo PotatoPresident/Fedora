@@ -3,7 +3,7 @@ package us.potatoboy.fedora.mixin;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.PlayerManager;
@@ -27,6 +27,6 @@ public abstract class PlayerManagerMixin {
             passedData.writeString(hat.id);
         }
         passedData.writeString("END");
-        ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, CommonPackets.HAT_LIST, passedData);
+        ServerPlayNetworking.send(player, CommonPackets.HAT_LIST, passedData);
     }
 }

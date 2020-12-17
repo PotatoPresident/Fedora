@@ -4,12 +4,13 @@ import dev.onyxstudios.cca.api.v3.component.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatManager;
@@ -79,7 +80,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
 
             PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
             passedData.writeString(hat.id, hat.id.length());
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerEntity, CommonPackets.UNLOCK_HAT, passedData);
+            ServerPlayNetworking.send((ServerPlayerEntity) playerEntity, CommonPackets.UNLOCK_HAT, passedData);
 
             Fedora.PLAYER_HAT_COMPONENT.sync(playerEntity);
         }
