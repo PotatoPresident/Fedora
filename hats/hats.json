@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "major_version": 1,
   "models": [
     "fedora",
@@ -20,9 +20,17 @@
     "horns",
     "cage",
     "goggles",
-    "straw_hat",
     "witch",
-    "horn"
+    "horn",
+    "axehead",
+    "chest",
+    "commando",
+    "duncecap",
+    "enderchest",
+    "headcrab",
+    "strawhat",
+    "wockyslush",
+    "xmaschest"
   ],
   "textures": [
     "box",
@@ -44,7 +52,15 @@
     "horns",
     "cage",
     "goggles",
-    "straw_hat",
-    "horn"
+    "horn",
+    "bear",
+    "cap",
+    "dunce",
+    "headcrab",
+    "helmmain",
+    "rim",
+    "strawhatmain",
+    "strawhatstraw",
+    "wockyslush"
   ]
 }

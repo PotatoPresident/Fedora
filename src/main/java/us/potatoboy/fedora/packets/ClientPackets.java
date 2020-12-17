@@ -6,7 +6,7 @@ import com.google.gson.JsonParser;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ConfirmScreen;
@@ -35,22 +35,22 @@ public class ClientPackets {
 
 
     public static void init() {
-        ClientSidePacketRegistry.INSTANCE.register(CommonPackets.UNLOCK_HAT, ((packetContext, packetByteBuf) -> {
+        ClientPlayNetworking.registerGlobalReceiver(CommonPackets.UNLOCK_HAT, (minecraftClient, clientPlayNetworkHandler, packetByteBuf, packetSender) ->  {
 
             String hatId = packetByteBuf.readString(30);
-            packetContext.getTaskQueue().execute(() -> {
+            minecraftClient.execute(() -> {
                 Hat hat = HatManager.getFromID(hatId);
 
-                MinecraftClient.getInstance().getToastManager().add(new HatToast(
+                minecraftClient.getToastManager().add(new HatToast(
                         new TranslatableText("toast.fedora.hatunlocked").formatted(hat.rarity == Hat.Rarity.COMMON ? Formatting.RESET : hat.rarity.getFormatting()),
                         hat.id,
                         30,
                         hat.rarity
                 ));
             });
-        }));
+        });
 
-        ClientSidePacketRegistry.INSTANCE.register(CommonPackets.HAT_LIST, ((packetContext, packetByteBuf) -> {
+        ClientPlayNetworking.registerGlobalReceiver(CommonPackets.HAT_LIST, ((minecraftClient, clientPlayNetworkHandler, packetByteBuf, packetSender) -> {
             HashSet<String> serverHats = new HashSet<>();
 
             String hatId = packetByteBuf.readString();
@@ -76,22 +76,22 @@ public class ClientPackets {
             if (needsHats) {
                 passedData.writeString("END");
 
-                MinecraftClient.getInstance().execute(() -> {
+                minecraftClient.execute(() -> {
                     MinecraftClient.getInstance().openScreen(new ConfirmScreen((accepted) -> {
                         if (accepted) {
-                            ClientSidePacketRegistry.INSTANCE.sendToServer(CommonPackets.REQUEST_HATS, passedData);
+                            ClientPlayNetworking.send(CommonPackets.REQUEST_HATS, passedData);
                         } else {
                             //Server Hats declined
                         }
 
-                        MinecraftClient.getInstance().openScreen(null);
+                        minecraftClient.openScreen(null);
                     }, new TranslatableText("server.hatPrompt.title"), new TranslatableText("server.hatPrompt.desc")));
 
                 });
             }
         }));
 
-        ClientSidePacketRegistry.INSTANCE.register(CommonPackets.HAT_FILE, ((packetContext, packetByteBuf) -> {
+        ClientPlayNetworking.registerGlobalReceiver(CommonPackets.HAT_FILE, ((minecraftClient, clientPlayNetworkHandler, packetByteBuf, packetSender) -> {
             int packetType = packetByteBuf.readInt();
             switch (packetType) {
                 case 0:

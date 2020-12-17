@@ -1,6 +1,6 @@
 package us.potatoboy.fedora.packets;
 
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
@@ -18,12 +18,12 @@ public class CommonPackets {
     public static final Identifier REQUEST_HATS = new Identifier(Fedora.MOD_ID, "request_hats");
 
     public static void init() {
-        ServerSidePacketRegistry.INSTANCE.register(SET_HAT, (packetContext, attachedData) -> {
-            String hatId = attachedData.readString(30);
-            packetContext.getTaskQueue().execute(() -> {
+        ServerPlayNetworking.registerGlobalReceiver(SET_HAT, (minecraftServer, serverPlayerEntity, serverPlayNetworkHandler, packetByteBuf, packetSender) ->  {
+            String hatId = packetByteBuf.readString(30);
+            minecraftServer.execute(() -> {
 
                 Hat hat = HatManager.getFromID(hatId);
-                PlayerHatComponent hatComponent = Fedora.PLAYER_HAT_COMPONENT.get(packetContext.getPlayer());
+                PlayerHatComponent hatComponent = Fedora.PLAYER_HAT_COMPONENT.get(serverPlayerEntity);
                 if (hat != null) {
                     if (hatComponent.getUnlockedHats().contains(hat)) {
                         hatComponent.setCurrentHat(hat);
@@ -37,7 +37,7 @@ public class CommonPackets {
             });
         });
 
-        ServerSidePacketRegistry.INSTANCE.register(REQUEST_HATS, ((packetContext, packetByteBuf) -> {
+        ServerPlayNetworking.registerGlobalReceiver(REQUEST_HATS, (minecraftServer, serverPlayerEntity, serverPlayNetworkHandler, packetByteBuf, packetSender) ->  {
             HashSet<String> requestedHats = new HashSet<>();
 
             String hatId = packetByteBuf.readString(30);
@@ -46,7 +46,7 @@ public class CommonPackets {
                 hatId = packetByteBuf.readString(30);
             }
 
-            HatManager.sendHats(packetContext.getPlayer(), requestedHats.toArray(new String[requestedHats.size()]));
-        }));
+            HatManager.sendHats(serverPlayerEntity, requestedHats.toArray(new String[requestedHats.size()]));
+        });
     }
 }

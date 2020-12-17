@@ -3,10 +3,10 @@ package us.potatoboy.fedora;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import us.potatoboy.fedora.packets.CommonPackets;
 
 import javax.imageio.ImageIO;
@@ -85,7 +85,7 @@ public class HatManager {
         return null;
     }
 
-    public static void sendHats(PlayerEntity player, String... hatIds) {
+    public static void sendHats(ServerPlayerEntity player, String... hatIds) {
         for (String hatId : hatIds) {
             Fedora.LOGGER.info("Sending " + player.getName().asString() + " hat: " + hatId);
 
@@ -101,7 +101,7 @@ public class HatManager {
                 modelData.writeString(hatId);
                 modelData.writeByteArray(modelBytes);
 
-                ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, CommonPackets.HAT_FILE, modelData);
+                ServerPlayNetworking.send(player, CommonPackets.HAT_FILE, modelData);
 
                 jsonElement.getAsJsonObject().get("textures").getAsJsonObject().entrySet().forEach(stringJsonElementEntry -> {
                     String key = stringJsonElementEntry.getKey();
@@ -121,7 +121,7 @@ public class HatManager {
 
                             textureData.writeByteArray(textureBytes);
 
-                            ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, CommonPackets.HAT_FILE, textureData);
+                            ServerPlayNetworking.send(player, CommonPackets.HAT_FILE, textureData);
                         } catch (IOException e) {
                             Fedora.LOGGER.warning("Failed to read texture: " + stringJsonElementEntry.getValue());
                         }
@@ -135,6 +135,6 @@ public class HatManager {
 
         PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
         passedData.writeInt(-1);
-        ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, CommonPackets.HAT_FILE, passedData);
+        ServerPlayNetworking.send(player, CommonPackets.HAT_FILE, passedData);
     }
 }
