@@ -1,0 +1,20 @@
+{
+  "toast.fedora.hatunlocked": "Hoed Ontgrendeld",
+  "fedora.text.creator": "Maker: %s",
+  "fedora.text.rarity": "Zeldzaamheid: %s",
+  "text.fedora.hatunlock": "Ontgrendelde hoed %s voor %s",
+  "text.fedora.hatremove": "Verwijderde hoed %s van %s",
+  "text.autoconfig.fedora/config.title": "Fedora Configuratie",
+  "text.autoconfig.fedora/config.option.autoDownload": "Download automatisch nieuwe hoeden wanneer toegevoegd",
+  "text.autoconfig.fedora/config.option.hatChance": "Kans voor entiteit om een hoed te hebben",
+  "text.autoconfig.fedora/config.option.hatBlacklist": "Entiteit hat zwarte lijst",
+  "text.autoconfig.fedora/config.option.serverHats": "Download aangepaste hoeden van servers",
+  "text.autoconfig.fedora/config.option.moddedHats": "Geef gemodde entiteiten hoeden",
+  "toast.fedora.serverHats": "Server Hoeden",
+  "toast.fedora.serverHats.desc": "Succesvol gedownload",
+  "fedora.hat.none": "Geen",
+  "server.hatPrompt.title": "Hoeden downloaden van de server?",
+  "server.hatPrompt.desc": "De server waar je verbinding mee maakt heeft hoeden die niet geïnstalleerd zijn op je client. Wil je ze downloaden naar je hoeden map? Als je dat niet doet, zul je ze niet kunnen zien.",
+  "text.fedora.invalid_hat": "Ongeldige hoed",
+  "text.fedora.set_hat": "Stel in %s hoeden"
+}

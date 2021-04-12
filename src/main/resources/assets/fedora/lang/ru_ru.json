@@ -1,0 +1,20 @@
+{
+  "toast.fedora.hatunlocked": "Шляпа Разблокирована",
+  "fedora.text.creator": "Создатель: %s",
+  "fedora.text.rarity": "Редкость: %s",
+  "text.fedora.hatunlock": "Шляпа %s разблокирована для %s",
+  "text.fedora.hatremove": "Шляпа %s снята с %s",
+  "text.autoconfig.fedora/config.title": "Конфигурация Fedora",
+  "text.autoconfig.fedora/config.option.autoDownload": "Автоматически скачивать новые шляпы",
+  "text.autoconfig.fedora/config.option.hatChance": "Шанс спавна сущности со шляпой",
+  "text.autoconfig.fedora/config.option.hatBlacklist": "Черный список шляп сущностей",
+  "text.autoconfig.fedora/config.option.serverHats": "Скачивать кастомные шляпы с сервера",
+  "text.autoconfig.fedora/config.option.moddedHats": "Дать модовым сущностям шляпы",
+  "toast.fedora.serverHats": "Шляпы сервера",
+  "toast.fedora.serverHats.desc": "Успешно скачаны",
+  "fedora.hat.none": "Нет",
+  "server.hatPrompt.title": "Скачать шляпы с сервера?",
+  "server.hatPrompt.desc": "Сервер, к которму вы хотите подключиться, имеет шляпы не установленные на вашем клиенте. Хотите их скачать в свою папку со шляпами? Если нет, то вы не сможете их видеть.",
+  "text.fedora.invalid_hat": "Недействительная шляпа",
+  "text.fedora.set_hat": "Установить %s шляпы"
+}
