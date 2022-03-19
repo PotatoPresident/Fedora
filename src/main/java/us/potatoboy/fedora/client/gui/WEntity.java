@@ -10,9 +10,9 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Quaternion;
+import net.minecraft.util.math.Vec3f;
 
 public class WEntity extends WWidget {
     private LivingEntity entity;
@@ -39,8 +39,8 @@ public class WEntity extends WWidget {
         MatrixStack matrixStack = new MatrixStack();
         matrixStack.translate(0.0D, 0.0D, 500.0D);
         matrixStack.scale((float)60, (float)60, (float)60);
-        Quaternion quaternion = Vector3f.POSITIVE_Z.getDegreesQuaternion(180.0F);
-        Quaternion quaternion2 = Vector3f.POSITIVE_X.getDegreesQuaternion(g * 20.0F);
+        Quaternion quaternion = Vec3f.POSITIVE_Z.getDegreesQuaternion(180.0F);
+        Quaternion quaternion2 = Vec3f.POSITIVE_X.getDegreesQuaternion(g * 20.0F);
         quaternion.hamiltonProduct(quaternion2);
         matrixStack.multiply(quaternion);
         float h = entity.bodyYaw;

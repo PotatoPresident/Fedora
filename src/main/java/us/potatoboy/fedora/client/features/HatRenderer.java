@@ -11,11 +11,11 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.render.model.json.Transformation;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.registry.Registry;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
@@ -117,7 +117,7 @@ public class HatRenderer<T extends LivingEntity, M extends EntityModel<T>> exten
         }
 
         matrices.translate(0.0D, -0.25D, 0.0D);
-        matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
+        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
         matrices.scale(0.625F, -0.625F, -0.625F);
 
         if (helper != null) {
