@@ -77,14 +77,14 @@ public class ClientPackets {
                 passedData.writeString("END");
 
                 MinecraftClient.getInstance().execute(() -> {
-                    MinecraftClient.getInstance().openScreen(new ConfirmScreen((accepted) -> {
+                    MinecraftClient.getInstance().setScreen(new ConfirmScreen((accepted) -> {
                         if (accepted) {
                             ClientSidePacketRegistry.INSTANCE.sendToServer(CommonPackets.REQUEST_HATS, passedData);
                         } else {
                             //Server Hats declined
                         }
 
-                        MinecraftClient.getInstance().openScreen(null);
+                        MinecraftClient.getInstance().setScreen(null);
                     }, new TranslatableText("server.hatPrompt.title"), new TranslatableText("server.hatPrompt.desc")));
 
                 });

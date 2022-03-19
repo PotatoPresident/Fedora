@@ -7,7 +7,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.util.InputUtil;
@@ -41,18 +41,18 @@ public class FedoraClient implements ClientModInitializer {
                 "category.fedora.hats"
         ));
 
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register(((entityType, livingEntityRenderer, registrationHelper) -> {
-            if (livingEntityRenderer instanceof PlayerEntityRenderer)
-                registrationHelper.register(new PlayerHatFeatureRenderer<>((PlayerEntityRenderer) livingEntityRenderer));
-            registrationHelper.register(new HatRenderer<>(livingEntityRenderer));
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register(((entityType, entityRenderer, registrationHelper, context) -> {
+            if (entityRenderer instanceof PlayerEntityRenderer)
+                registrationHelper.register(new PlayerHatFeatureRenderer<>((PlayerEntityRenderer) entityRenderer));
+            registrationHelper.register(new HatRenderer<>(entityRenderer));
         }));
 
-        ModelLoadingRegistry.INSTANCE.registerAppender((manager, out) ->
+        ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) ->
                 HatManager.getHatRegistry().forEach((hat -> out.accept(hat.getModelId()))));
 
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             while (hatKey.wasPressed()) {
-                minecraftClient.openScreen(new HatScreen(new HatGUI(minecraftClient.player)));
+                minecraftClient.setScreen(new HatScreen(new HatGUI(minecraftClient.player)));
 
                 HAT_HELPERS = new HashMap<>();
                 registerVanillaHelpers();

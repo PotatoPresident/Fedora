@@ -1,6 +1,7 @@
 package us.potatoboy.fedora.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
 import net.minecraft.client.util.math.MatrixStack;
@@ -26,22 +27,24 @@ public class HatToast implements Toast {
     }
 
     @Override
-    public Toast.Visibility draw(MatrixStack matrices, ToastManager manager, long startTime) {
+    public Visibility draw(MatrixStack matrices, ToastManager manager, long startTime) {
         if (this.justUpdated) {
             this.startTime = startTime;
             this.justUpdated = false;
         }
 
-        manager.getGame().getTextureManager().bindTexture(TEXT);
-        RenderSystem.color3f(1.0F, 1.0F, 1.0F);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, TEXT);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
         if (rarity.equals(Hat.Rarity.EPIC)) {
             manager.drawTexture(matrices, 0, 0, 0, 32, this.getWidth(), this.getHeight());
         } else {
             manager.drawTexture(matrices, 0, 0, 0, 0, this.getWidth(), this.getHeight());
         }
 
-        manager.getGame().textRenderer.draw(matrices, title, 32.0F, 7.0F, 0);
-        manager.getGame().textRenderer.draw(matrices, desc, 32.0F, 18.0F, 0);
+        manager.getClient().textRenderer.draw(matrices, title, 32.0F, 7.0F, 0);
+        manager.getClient().textRenderer.draw(matrices, desc, 32.0F, 18.0F, 0);
 
         return startTime - this.startTime < 5000L ? Toast.Visibility.SHOW : Toast.Visibility.HIDE;
     }

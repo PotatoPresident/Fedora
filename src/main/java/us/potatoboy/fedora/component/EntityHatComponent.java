@@ -1,7 +1,7 @@
 package us.potatoboy.fedora.component;
 
-import dev.onyxstudios.cca.api.v3.component.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.NbtCompound;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
