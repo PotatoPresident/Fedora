@@ -86,26 +86,26 @@ public class FedoraClient implements ClientModInitializer {
     }
 
     private void registerVanillaHelpers() {
+        registerHelper(BatEntity.class, -0.5, 0, 0, 1F);
         registerHelper(BeeEntity.class, -0.4, 0, 0, 0.8F);
         registerHelper(BlazeEntity.class, -0.4, 0, 0, 1F);
         registerHelper(CatEntity.class, -0.8, 0.1, 0, 0.6F);
-        registerHelper(SpiderEntity.class, -0.3, 0.3, 0, 1F);
         registerHelper(ChickenEntity.class, 0, 0, 0, 0.5F);
         registerHelper(CodEntity.class, -0.6, 0, 0, 1F);
         registerHelper(CowEntity.class, -0.4, 0.2, 0, 1F);
         registerHelper(DolphinEntity.class, -0.1, 0, 0, 1F);
-        registerHelper(LlamaEntity.class, 0.8, 0.3, 0, 1F);
-        registerHelper(HorseBaseEntity.class, 0.3, 0, 0, 1F);
-        registerHelper(GuardianEntity.class, -1.6, 0, 0, 1F);
         registerHelper(EndermiteEntity.class, -2.5, 0, 0, 0.2F);
-        registerHelper(IllagerEntity.class, 0.2, 0, 0, 1F);
-        registerHelper(MerchantEntity.class, 0.2, 0, 0, 1F);
-        registerHelper(VillagerEntity.class, 0.2, 0, 0, 1F);
-        registerHelper(ZombieVillagerEntity.class, 0.0625, 0, 0, 1F);
         registerHelper(FoxEntity.class, -0.6, 0.1, -0.1, 1F);
         registerHelper(GhastEntity.class, -0.2, 0, 0, 2F);
+        registerHelper(GoatEntity.class, 0.6,0.9,0,1F);
+        registerHelper(GuardianEntity.class, -1.6, 0, 0, 1F);
         registerHelper(HoglinEntity.class, -0.5, 0.4, 0, 1F);
+        registerHelper(HorseBaseEntity.class, 0.3, 0, 0, 1F);
+        registerHelper(IllagerEntity.class, 0.2, 0, 0, 1F);
+        registerHelper(IronGolemEntity.class, 0.4, 0.2, 0, 1F);
+        registerHelper(LlamaEntity.class, 0.8, 0.3, 0, 1F);
         registerHelper(MagmaCubeEntity.class, -2.4, 0, 0, 1F);
+        registerHelper(MerchantEntity.class, 0.2, 0, 0, 1F);
         registerHelper(OcelotEntity.class, -0.8, 0.1, 0, 0.6F);
         registerHelper(PandaEntity.class, -0.3, 0, 0, 1F);
         registerHelper(ParrotEntity.class, new HatHelper(-0.9, 0.4, 0, 0.3F, 4));
@@ -119,16 +119,18 @@ public class FedoraClient implements ClientModInitializer {
         registerHelper(SheepEntity.class, -0.4, 0.1, 0, 1F);
         registerHelper(SilverfishEntity.class, -2.5, 0, 0, 0.2F);
         registerHelper(SlimeEntity.class, -2.4, 0, 0, 1F);
+        registerHelper(SnowGolemEntity.class, new HatHelper(-0.1, 0 , 0, 1F, 2));
+        registerHelper(SpiderEntity.class, -0.3, 0.3, 0, 1F);
+        registerHelper(SquidEntity.class, -0.7, 0, 0, 1F);
         registerHelper(StriderEntity.class, -0.1, 0, 0, 1F);
+        registerHelper(TraderLlamaEntity.class, 0.5, 0.2, 0, 1F);
         registerHelper(TropicalFishEntity.class, -0.8, 0, 0, 0.5F);
         registerHelper(TurtleEntity.class, -0.9, 0, 0, 0.5F);
-        registerHelper(WolfEntity.class, -0.5, 0, -0.1, 0.7F);
-        registerHelper(ZoglinEntity.class, -0.5, 0.4, 0, 1F);
-        registerHelper(WolfEntity.class, -0.6, 0, -0.1, 0.7F);
-        registerHelper(BatEntity.class, -0.5, 0, 0, 1F);
-        registerHelper(IronGolemEntity.class, 0.4, 0.2, 0, 1F);
-        registerHelper(TraderLlamaEntity.class, 0.5, 0.2, 0, 1F);
+        registerHelper(VillagerEntity.class, 0.2, 0, 0, 1F);
         registerHelper(WitherEntity.class, -0.4, 0, 0, 1F);
-        registerHelper(SnowGolemEntity.class, new HatHelper(-0.1, 0 , 0, 1F, 2));
+        registerHelper(WolfEntity.class, -0.5, 0, -0.1, 0.7F);
+        registerHelper(WolfEntity.class, -0.6, 0, -0.1, 0.7F);
+        registerHelper(ZoglinEntity.class, -0.5, 0.4, 0, 1F);
+        registerHelper(ZombieVillagerEntity.class, 0.0625, 0, 0, 1F);
     }
 }

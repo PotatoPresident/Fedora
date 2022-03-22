@@ -22,7 +22,7 @@ public class FedoraConfig implements ConfigData {
 
     public boolean moddedHats = true;
 
-    public List<String> hatBlacklist = Arrays.asList("minecraft:armor_stand", "minecraft:witch", "minecraft:shulker");
+    public List<String> hatBlacklist = Arrays.asList("minecraft:armor_stand", "minecraft:axolotl", "minecraft:witch", "minecraft:shulker");
 
     public Boolean isBlacklisted(Identifier identifier) {
         for (String entity : hatBlacklist) {
