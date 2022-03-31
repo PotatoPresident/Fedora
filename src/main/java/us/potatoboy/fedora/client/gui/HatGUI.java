@@ -4,6 +4,7 @@ import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WDynamicLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import io.github.cottonmc.cotton.gui.widget.data.InputResult;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
@@ -153,10 +154,11 @@ public class HatGUI extends LightweightGuiDescription {
         }
 
         @Override
-        public void onClick(int x, int y, int button) {
-            if (!isVisable()) return;
+        public InputResult onClick(int x, int y, int button) {
+            if (!isVisable()) return InputResult.IGNORED;
 
             super.onClick(x, y, button);
+            return InputResult.PROCESSED;
         }
 
         private boolean isVisable() {

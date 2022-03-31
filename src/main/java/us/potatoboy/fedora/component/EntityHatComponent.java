@@ -1,8 +1,8 @@
 package us.potatoboy.fedora.component;
 
-import dev.onyxstudios.cca.api.v3.component.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
-import net.minecraft.nbt.CompoundTag;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import net.minecraft.nbt.NbtCompound;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
 import us.potatoboy.fedora.HatManager;
@@ -25,7 +25,7 @@ public class EntityHatComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     @Override
-    public void readFromNbt(CompoundTag tag) {
+    public void readFromNbt(NbtCompound tag) {
         if (tag.contains("currentHat")) {
             String hatId = tag.getString("currentHat");
 
@@ -41,7 +41,7 @@ public class EntityHatComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     @Override
-    public void writeToNbt(CompoundTag tag) {
+    public void writeToNbt(NbtCompound tag) {
         if (currentHat != null) {
             tag.putString("currentHat", currentHat.id);
         } else {

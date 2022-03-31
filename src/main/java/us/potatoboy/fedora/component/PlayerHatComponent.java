@@ -1,14 +1,14 @@
 package us.potatoboy.fedora.component;
 
-import dev.onyxstudios.cca.api.v3.component.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.network.PacketByteBuf;
 import us.potatoboy.fedora.Fedora;
 import us.potatoboy.fedora.Hat;
@@ -94,7 +94,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     @Override
-    public void readFromNbt(CompoundTag compoundTag) {
+    public void readFromNbt(NbtCompound compoundTag) {
         if (compoundTag.contains("currenthat")) {
             String hatId = compoundTag.getString("currenthat");
 
@@ -111,7 +111,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
         if (compoundTag.contains("unlockedHats")) {
             unlockedHats = new ArrayList<>();
 
-            ListTag listTag = compoundTag.getList("unlockedHats", 10);
+            NbtList listTag = compoundTag.getList("unlockedHats", 10);
             for(int i = 0; i < listTag.size(); ++i) {
                 String hatId = listTag.getCompound(i).getString("name");
                 Hat hat = HatManager.getFromID(hatId);
@@ -125,7 +125,7 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     @Override
-    public void writeToNbt(CompoundTag compoundTag) {
+    public void writeToNbt(NbtCompound compoundTag) {
         if (currentHat != null) {
             compoundTag.putString("currenthat", currentHat.id);
         } else {
@@ -133,9 +133,9 @@ public class PlayerHatComponent implements ComponentV3, AutoSyncedComponent {
         }
 
         if (!unlockedHats.isEmpty()) {
-            ListTag listTag = new ListTag();
+            NbtList listTag = new NbtList();
             unlockedHats.forEach((hat -> {
-                CompoundTag compoundTag1 = new CompoundTag();
+                NbtCompound compoundTag1 = new NbtCompound();
                 compoundTag1.putString("name", hat.id);
                 listTag.add(compoundTag1);
             }));
