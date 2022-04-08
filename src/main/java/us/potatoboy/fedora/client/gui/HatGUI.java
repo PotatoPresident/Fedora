@@ -6,7 +6,7 @@ import io.github.cottonmc.cotton.gui.widget.WDynamicLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.github.cottonmc.cotton.gui.widget.data.InputResult;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -23,9 +23,10 @@ import us.potatoboy.fedora.client.FedoraClient;
 import us.potatoboy.fedora.packets.CommonPackets;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class HatGUI extends LightweightGuiDescription {
-    private Hat currentHat = null;
+    private Hat currentHat;
     private int currentPage = 0;
     private final int pages;
     private ArrayList<Hat> unlockedHats;
@@ -38,6 +39,7 @@ public class HatGUI extends LightweightGuiDescription {
     public HatGUI(ClientPlayerEntity playerEntity) {
         currentHat = Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getCurrentHat();
         unlockedHats = (ArrayList<Hat>) Fedora.PLAYER_HAT_COMPONENT.get(playerEntity).getUnlockedHats().clone();
+        unlockedHats.sort(Comparator.comparing(hat -> hat.id));
         unlockedHats.add(0, Hat.NONE);
 
         int tempPages = (unlockedHats.size() + 6) / 7;
@@ -52,7 +54,7 @@ public class HatGUI extends LightweightGuiDescription {
         root.add(player, 0, 0, 80, 200);
 
         WDynamicLabel pageNumber = new WDynamicLabel(() -> (currentPage + 1) + "/" + pages);
-        root.add(pageNumber, 135, 5, 30, 30);
+        root.add(pageNumber, 125, 10, 30, 30);
 
         backwards = new WButton();
         backwards.setLabel(new LiteralText("<"));
@@ -60,7 +62,7 @@ public class HatGUI extends LightweightGuiDescription {
             changePage(false);
         });
         backwards.setEnabled(currentPage > 0);
-        root.add(backwards, 85, 0, 20, 20);
+        root.add(backwards, 75, 4, 20, 20);
 
         forwards = new WButton();
         forwards.setLabel(new LiteralText(">"));
@@ -68,7 +70,7 @@ public class HatGUI extends LightweightGuiDescription {
             changePage(true);
         });
         forwards.setEnabled(currentPage + 1 != pages);
-        root.add(forwards, 185, 0, 20, 20);
+        root.add(forwards, 175, 4, 20, 20);
 
         for (int i = 0; i < 7; i++) {
             if (unlockedHats.size() <= i) return;
@@ -85,14 +87,14 @@ public class HatGUI extends LightweightGuiDescription {
 
                 PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
                 passedData.writeString(currentHat.id);
-                ClientSidePacketRegistry.INSTANCE.sendToServer(CommonPackets.SET_HAT, passedData);
+                ClientPlayNetworking.send(CommonPackets.SET_HAT, passedData);
 
                 if (!FedoraClient.currentSession.isOnServer()) {
                     Fedora.PLAYER_HAT_COMPONENT.get(MinecraftClient.getInstance().player).setCurrentHat(currentHat);
                 }
             });
 
-            root.add(hatChoice, 85, 25 + (i * 25));
+            root.add(hatChoice, 75, 25 + (i * 25));
         }
     }
 

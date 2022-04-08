@@ -12,7 +12,7 @@ import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3f;
 
 public class WEntity extends WWidget {
-    private LivingEntity entity;
+    private final LivingEntity entity;
 
     public WEntity(LivingEntity entity) {
         this.entity = entity;
@@ -30,7 +30,7 @@ public class WEntity extends WWidget {
         matrixStack.scale(1.0F, 1.0F, -1.0F);
         RenderSystem.applyModelViewMatrix();
         MatrixStack matrixStack2 = new MatrixStack();
-        matrixStack2.translate(0.0D, 0.0D, 1000.0D);
+        matrixStack2.translate(0.0D, 0.0D, 500.0D);
         matrixStack2.scale((float)60, (float)60, (float)60);
         Quaternion quaternion = Vec3f.POSITIVE_Z.getDegreesQuaternion(180.0F);
         Quaternion quaternion2 = Vec3f.POSITIVE_X.getDegreesQuaternion(g * 20.0F);
